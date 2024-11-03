@@ -1,0 +1,45 @@
+.tasklist {
+  .title {
+    font-size: 0.8em;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+  }
+
+  .listwrapper {
+    list-style: none;
+    padding: 0.5em;
+    border-bottom: 1px solid rgb(220, 217, 217);
+  }
+}
+
+.taskitem {
+  width: 100%;
+
+  margin-bottom: 1em;
+
+  .itemwrapper {
+    width: 40%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 0.5em;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: ease 0.15s;
+  }
+
+  &:first-child {
+    .itemtitle {
+      font-weight: bold;
+    }
+
+    border-radius: 1cap;
+    background-color: rgb(244, 240, 240);
+  }
+}
