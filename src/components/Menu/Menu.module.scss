@@ -1,8 +1,11 @@
+@import "../../styles/variables";
+
 nav {
-  background-color: rgb(250, 248, 248);
+  background-color: $background-color;
 
   min-height: 700px;
   min-width: 300px;
+  margin-right: 2em;
 
   border-radius: 2cap;
   padding: 1em;

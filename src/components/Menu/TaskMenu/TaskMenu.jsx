@@ -1,4 +1,4 @@
-import styles from "./TaskList.module.scss";
+import styles from "./TaskMenu.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,7 +13,7 @@ const TaskItem = ({ title }) => {
   );
 };
 
-const TaskList = () => {
+const TaskMenu = () => {
   return (
     <div className={styles.tasklist}>
       <h1 className={styles.title}>Tasks</h1>
@@ -26,4 +26,4 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+export default TaskMenu;

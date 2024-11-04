@@ -1,11 +1,11 @@
 import styles from "./Menu.module.scss";
-import TaskList from "./TaskList/TaskList";
+import TaskMenu from "./TaskMenu/TaskMenu";
 
 const Menu = () => {
   return (
     <nav>
       <h1 className={styles.title}>Menu</h1>
-      <TaskList />
+      <TaskMenu />
     </nav>
   );
 };

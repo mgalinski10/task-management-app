@@ -1,0 +1,40 @@
+.listwrapper {
+  list-style: none;
+
+  button {
+    min-width: 600px;
+    background-color: inherit;
+    padding: 1em;
+    border: 1px solid rgb(220, 217, 217);
+    border-radius: 1cap;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: grey;
+    font-size: 1em;
+
+    .icon {
+      margin-right: 1em;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(246, 176, 45);
+      color: black;
+      transition: ease-in 0.2s;
+    }
+  }
+}
+
+.itemwrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 1em;
+  border-bottom: 1px solid rgb(220, 217, 217);
+
+  input {
+    margin-right: 1em;
+  }
+}
