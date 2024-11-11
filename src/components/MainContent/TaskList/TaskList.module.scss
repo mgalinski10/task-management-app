@@ -1,29 +1,5 @@
-.listwrapper {
+.listWrapper {
   list-style: none;
-
-  button {
-    min-width: 600px;
-    background-color: inherit;
-    padding: 1em;
-    border: 1px solid rgb(220, 217, 217);
-    border-radius: 1cap;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    color: grey;
-    font-size: 1em;
-
-    .icon {
-      margin-right: 1em;
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgb(246, 176, 45);
-      color: black;
-      transition: ease-in 0.2s;
-    }
-  }
 }
 
 .itemwrapper {
@@ -36,5 +12,38 @@
 
   input {
     margin-right: 1em;
+    width: 15px;
+    height: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.buttonWrapper {
+  background-color: inherit;
+  color: grey;
+
+  min-width: 600px;
+  padding: 1em;
+  font-size: 1em;
+
+  border: 1px solid rgb(220, 217, 217);
+  border-radius: 1cap;
+
+  display: flex;
+  align-items: center;
+
+  .icon {
+    margin-right: 1em;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+    background-color: rgb(254, 215, 19);
+
+    transition: ease-in 0.2s;
   }
 }

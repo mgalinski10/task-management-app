@@ -1,20 +1,25 @@
-import styles from "./AddTaskFrom.module.scss";
+import styles from "./AddTaskForm.module.scss";
 
 const AddTaskForm = () => {
   return (
     <form>
-      <h1 className={styles.header}>Menage Task</h1>
+      <h1 className={styles.header}>Task:</h1>
       <input
         type="text"
-        placeholder="Name your task.."
-        className={styles.taskname}
+        placeholder="Renew driver's license"
+        className={styles.taskInput}
+      />
+      <textarea
+        className={styles.taskDescription}
+        placeholder="Description"
+        rows="8"
       />
 
       <div className={styles.buttons}>
-        <button type="submit" className={styles.deletetask}>
+        <button type="submit" className={styles.deleteTaskButton}>
           Delete Task
         </button>
-        <button type="submit">Save Task</button>
+        <button type="submit">Add task</button>
       </div>
     </form>
   );
