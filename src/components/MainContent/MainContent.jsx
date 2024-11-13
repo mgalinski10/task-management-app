@@ -1,16 +1,11 @@
 import styles from "./MainContent.module.scss";
-import TaskList from "./TaskList/TaskList";
 
-const Header = ({ title }) => {
-  return <h1 className={styles.title}>{title}</h1>;
-};
-
-const MainContent = () => {
+const MainContent = ({ children, title }) => {
   return (
-    <main>
-      <Header title="Today" />
-      <TaskList />
-    </main>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{title}</h1>
+      <main>{children}</main>
+    </div>
   );
 };
 

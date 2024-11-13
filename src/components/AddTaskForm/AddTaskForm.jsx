@@ -6,7 +6,7 @@ const AddTaskForm = () => {
       <h1 className={styles.header}>Task:</h1>
       <input
         type="text"
-        placeholder="Renew driver's license"
+        placeholder="Enter task name"
         className={styles.taskInput}
       />
       <textarea
