@@ -2,9 +2,8 @@
 
 form {
   background-color: $background-color;
-  height: 500px;
+  min-height: 500px;
 
-  width: 450px;
   padding: 1em;
   border-radius: 2cap;
 
@@ -22,9 +21,12 @@ form {
   }
 
   .taskInput {
-    background-color: inherit;
+    font-family: inherit;
 
-    font-size: 1.2em;
+    background-color: inherit;
+    width: 400px;
+
+    font-size: 1.1em;
     padding: 0.3em;
 
     border-radius: 0.5cap;
@@ -64,7 +66,9 @@ form {
 
       width: 45%;
       padding: 0.7em;
+
       font-size: 1em;
+      font-weight: bolder;
 
       border: 1px solid rgb(220, 217, 217);
       border-radius: 1cap;

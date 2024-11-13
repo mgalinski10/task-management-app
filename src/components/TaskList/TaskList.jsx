@@ -1,6 +1,7 @@
 import styles from "./TaskList.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useTasks } from "../../context/TaskContext";
 
 const AddNewTaskButton = () => {
   return (
@@ -11,21 +12,23 @@ const AddNewTaskButton = () => {
   );
 };
 
-const TaskItem = ({ children }) => {
+const TaskItem = ({ task }) => {
   return (
     <li className={styles.itemwrapper}>
       <input type="checkbox"></input>
-      <p>{children}</p>
+      <p>{task}</p>
     </li>
   );
 };
 
 const TaskList = () => {
+  const { tasks } = useTasks();
   return (
     <ul className={styles.listWrapper}>
       <AddNewTaskButton />
-      <TaskItem>Learn math</TaskItem>
-      <TaskItem>Learn math</TaskItem>
+      {tasks.map((task, index) => (
+        <TaskItem key={index} task={task} />
+      ))}
     </ul>
   );
 };
