@@ -1,18 +1,18 @@
 import styles from "./App.module.scss";
 import Menu from "./components/Menu/Menu";
-import MainContent from "./components/MainContent/MainContent";
-import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
-import TaskList from "./components/TaskList/TaskList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Today from "./pages/Today/Today";
 
 const App = () => {
   return (
-    <div className={styles.container}>
-      <Menu />
-      <MainContent title="Today">
-        <TaskList />
-      </MainContent>
-      <AddTaskForm />
-    </div>
+    <BrowserRouter>
+      <div className={styles.container}>
+        <Menu />
+        <Routes>
+          <Route path="/" element={<Today />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 

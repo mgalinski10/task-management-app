@@ -3,11 +3,13 @@
 nav {
   background-color: $background-color;
 
-  min-height: 700px;
+  height: 95vh;
   min-width: 300px;
 
   border-radius: 2cap;
   padding: 1em;
+
+  margin-right: 2em;
 
   .title {
     text-align: center;
