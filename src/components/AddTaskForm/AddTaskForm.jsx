@@ -45,10 +45,7 @@ const AddTaskForm = () => {
       />
 
       <div className={styles.buttons}>
-        <button type="submit" className={styles.deleteTaskButton}>
-          Delete Task
-        </button>
-        <button type="submit">Save task</button>
+        <button type="submit">Add task</button>
       </div>
     </form>
   );
