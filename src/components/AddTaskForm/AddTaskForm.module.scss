@@ -11,13 +11,22 @@ form {
   flex-direction: column;
   justify-content: space-around;
 
-  margin-left: 2em;
+  .headerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  .header {
-    font-size: 1.4em;
-    margin-bottom: 2em;
+    .header {
+      font-size: 1.4em;
+    }
 
-    text-align: center;
+    .closeIcon {
+      font-size: 1.8em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .taskInput {

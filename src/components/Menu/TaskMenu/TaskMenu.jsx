@@ -19,7 +19,6 @@ const TaskMenu = () => {
       <h1 className={styles.title}>Tasks</h1>
       <ul className={styles.listWrapper}>
         <TaskMenuItem title="Today" />
-        <TaskMenuItem title="Today" />
       </ul>
     </div>
   );

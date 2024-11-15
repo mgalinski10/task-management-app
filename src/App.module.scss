@@ -9,11 +9,11 @@
 
 body {
   font-family: "Lexend", sans-serif;
-  padding: 1em;
   color: rgb(73, 73, 73);
 }
 
 .container {
+  width: 100vw;
   display: flex;
-  justify-content: space-around;
+  padding: 1em;
 }

@@ -1,28 +1,23 @@
 import styles from "./TaskList.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useTasks } from "../../context/TaskContext";
+import { useToday } from "../../context/TodayContext";
+
+import TaskItem from "./TaskItem/TaskItem";
 
 const AddNewTaskButton = () => {
+  const { openAddTaskForm } = useToday();
   return (
-    <button className={styles.buttonWrapper}>
+    <button className={styles.buttonWrapper} onClick={openAddTaskForm}>
       <FontAwesomeIcon icon={faPlus} className={styles.icon} />
       <p>Add New Task</p>
     </button>
   );
 };
 
-const TaskItem = ({ task }) => {
-  return (
-    <li className={styles.itemwrapper}>
-      <input type="checkbox"></input>
-      <p>{task}</p>
-    </li>
-  );
-};
-
 const TaskList = () => {
-  const { tasks } = useTasks();
+  const { tasks } = useToday();
+
   return (
     <ul className={styles.listWrapper}>
       <AddNewTaskButton />

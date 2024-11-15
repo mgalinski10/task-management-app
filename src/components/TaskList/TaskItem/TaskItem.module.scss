@@ -1,0 +1,29 @@
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1em;
+  border-bottom: 1px solid rgb(220, 217, 217);
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    input {
+      margin-right: 1em;
+      width: 15px;
+      height: 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(244, 243, 243);
+    border-radius: 1cap;
+  }
+}
