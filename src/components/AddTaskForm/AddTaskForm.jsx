@@ -1,10 +1,12 @@
 import { useState } from "react";
 import styles from "./AddTaskForm.module.scss";
-import { useTasks } from "../../context/TaskContext";
+import { useToday } from "../../context/TodayContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const AddTaskForm = () => {
   const [task, setTask] = useState("");
-  const { addTask } = useTasks();
+  const { addTask, closeAddForm } = useToday();
   const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
@@ -17,7 +19,16 @@ const AddTaskForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className={styles.header}>Task:</h1>
+      <div className={styles.headerWrapper}>
+        <h1 className={styles.header}>Task:</h1>
+        <FontAwesomeIcon
+          icon={faXmark}
+          role="button"
+          className={styles.closeIcon}
+          onClick={closeAddForm}
+        />
+      </div>
+
       <input
         type="text"
         placeholder="Enter task name"
@@ -34,10 +45,7 @@ const AddTaskForm = () => {
       />
 
       <div className={styles.buttons}>
-        <button type="submit" className={styles.deleteTaskButton}>
-          Delete Task
-        </button>
-        <button type="submit">Save task</button>
+        <button type="submit">Add task</button>
       </div>
     </form>
   );
