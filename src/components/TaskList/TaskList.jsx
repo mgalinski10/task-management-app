@@ -18,11 +18,20 @@ const AddNewTaskButton = () => {
 const TaskList = () => {
   const { tasks } = useToday();
 
+  const addColor = (task) => {
+    const priority = task.priority;
+    if (priority === "high") {
+      return "rgb(255, 103, 86)";
+    } else if (priority === "medium") {
+      return "rgb(254, 215, 19)";
+    } else return "lightgreen";
+  };
+
   return (
     <ul className={styles.listWrapper}>
       <AddNewTaskButton />
       {tasks.map((task, index) => (
-        <TaskItem key={index} task={task} />
+        <TaskItem key={index} taskObj={task} color={addColor(task)} />
       ))}
     </ul>
   );

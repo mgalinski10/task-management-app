@@ -1,20 +1,24 @@
-import { useState } from "react";
 import styles from "./AddTaskForm.module.scss";
+import { useState } from "react";
 import { useToday } from "../../context/TodayContext";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 
 const AddTaskForm = () => {
-  const [task, setTask] = useState("");
-  const { addTask, closeAddForm } = useToday();
+  const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [priority, setPriority] = useState("medium");
+  const { addTask, closeAddForm } = useToday();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (task.trim()) {
+    if (taskName.trim()) {
+      const task = { name: taskName, priority: priority, date: date };
       addTask(task);
-      console.log(task);
-      setTask("");
+      setTaskName("");
     }
   };
   return (
@@ -32,8 +36,8 @@ const AddTaskForm = () => {
       <input
         type="text"
         placeholder="Enter task name"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
+        value={taskName}
+        onChange={(e) => setTaskName(e.target.value)}
         className={styles.taskInput}
       />
       <textarea
@@ -44,8 +48,18 @@ const AddTaskForm = () => {
         rows="8"
       />
 
+      <TaskDetailsForm
+        date={date}
+        priority={priority}
+        SetDate={setDate}
+        SetPriority={setPriority}
+      />
+
       <div className={styles.buttons}>
-        <button type="submit">Add task</button>
+        <button type="submit" className={styles.deleteTaskButton}>
+          Delete task
+        </button>
+        <button type="submit">Save task</button>
       </div>
     </form>
   );
