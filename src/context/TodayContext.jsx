@@ -10,11 +10,6 @@ export const TodayPageProvider = ({ children }) => {
     setTasks([...tasks, newTask]);
   };
 
-  const deleteTask = (taskKey) => {
-    const updatedTasks = tasks.filter((task) => task.key !== taskKey);
-    setTasks(updatedTasks);
-  };
-
   const openAddTaskForm = () => {
     setIsAddForm(true);
   };

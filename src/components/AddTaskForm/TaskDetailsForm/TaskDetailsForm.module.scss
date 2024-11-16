@@ -1,0 +1,34 @@
+.wrapper {
+  list-style: none;
+  color: rgb(87, 87, 87);
+  font-size: 0.95em;
+
+  .item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+
+    p {
+      width: 25%;
+    }
+
+    input[type="date"] {
+      background-color: inherit;
+      border: 1px solid rgb(220, 217, 217);
+      border-radius: 1cap;
+      padding: 0.5em;
+      color: inherit;
+      text-transform: uppercase;
+    }
+
+    select {
+      background-color: inherit;
+      border: 1px solid rgb(220, 217, 217);
+      border-radius: 1cap;
+      padding: 0.5em;
+      color: inherit;
+      text-transform: capitalize;
+    }
+  }
+}

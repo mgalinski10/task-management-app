@@ -1,6 +1,7 @@
 .itemContainer {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 
   padding: 1em;
   border-bottom: 1px solid rgb(220, 217, 217);
@@ -8,15 +9,50 @@
   .wrapper {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 
-    input {
-      margin-right: 1em;
-      width: 15px;
-      height: 15px;
+    margin-bottom: 0.5em;
 
-      &:hover {
-        cursor: pointer;
+    .nameWrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        margin-right: 1em;
+        width: 15px;
+        height: 15px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .details {
+    display: flex;
+    font-size: 0.8em;
+
+    p {
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      padding: 0.5em;
+
+      &:first-child {
+        border-right: 1px solid rgb(220, 217, 217);
+        padding-left: 0;
+      }
+
+      span {
+        margin-right: 0.5em;
+
+        .priorityBox {
+          width: 1.5em;
+          height: 1.5em;
+
+          border-radius: 0.5cap;
+        }
       }
     }
   }
