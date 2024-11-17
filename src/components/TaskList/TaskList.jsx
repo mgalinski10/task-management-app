@@ -6,9 +6,9 @@ import { useToday } from "../../context/TodayContext";
 import TaskItem from "./TaskItem/TaskItem";
 
 const AddNewTaskButton = () => {
-  const { openAddTaskForm } = useToday();
+  const { openAddNewTaskForm } = useToday();
   return (
-    <button className={styles.buttonWrapper} onClick={openAddTaskForm}>
+    <button className={styles.buttonWrapper} onClick={openAddNewTaskForm}>
       <FontAwesomeIcon icon={faPlus} className={styles.icon} />
       <p>Add New Task</p>
     </button>

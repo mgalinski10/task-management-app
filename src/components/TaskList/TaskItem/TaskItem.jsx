@@ -5,8 +5,14 @@ import styles from "./TaskItem.module.scss";
 import { useToday } from "../../../context/TodayContext";
 
 const TaskItem = ({ taskObj, color }) => {
+  const { openEditTaskForm } = useToday();
+
+  const handleClick = () => {
+    openEditTaskForm(taskObj);
+  };
+
   return (
-    <li className={styles.itemContainer} role="button">
+    <li className={styles.itemContainer} role="button" onClick={handleClick}>
       <div className={styles.wrapper}>
         <div className={styles.nameWrapper}>
           <input type="checkbox"></input>

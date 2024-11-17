@@ -1,13 +1,12 @@
-import { useToday } from "../../context/TodayContext";
 import styles from "./TaskDetailsForm.module.scss";
 
-const TaskDetailsForm = ({ date, priority, SetPriority, SetDate }) => {
+const TaskDetailsForm = ({ date, priority, setPriority, setDate }) => {
   const handlePriorityChange = (e) => {
-    SetPriority(e.target.value);
+    setPriority(e.target.value);
   };
 
   const handleDateChange = (e) => {
-    SetDate(e.target.value);
+    setDate(e.target.value);
   };
   return (
     <ul className={styles.wrapper}>
