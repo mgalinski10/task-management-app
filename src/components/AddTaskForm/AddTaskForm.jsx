@@ -1,10 +1,11 @@
 import styles from "./AddTaskForm.module.scss";
 import { useState } from "react";
 import { useToday } from "../../context/TodayContext";
+import { nanoid } from "nanoid";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
+import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
 
 const AddTaskForm = () => {
   const [taskName, setTaskName] = useState("");
@@ -13,14 +14,28 @@ const AddTaskForm = () => {
   const [priority, setPriority] = useState("medium");
   const { addTask, closeAddForm } = useToday();
 
+  const resetForm = () => {
+    setTaskName("");
+    setDescription("");
+    setPriority("medium");
+    setDate("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskName.trim()) {
-      const task = { name: taskName, priority: priority, date: date };
+      const task = {
+        name: taskName,
+        description: description,
+        priority: priority,
+        date: date,
+        id: nanoid(),
+      };
       addTask(task);
-      setTaskName("");
+      resetForm();
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.headerWrapper}>
@@ -35,14 +50,14 @@ const AddTaskForm = () => {
 
       <input
         type="text"
-        placeholder="Enter task name"
+        placeholder={"Enter Task Name"}
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
         className={styles.taskInput}
       />
       <textarea
         className={styles.taskDescription}
-        placeholder="Description"
+        placeholder={"Description"}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         rows="8"
@@ -56,9 +71,7 @@ const AddTaskForm = () => {
       />
 
       <div className={styles.buttons}>
-        <button type="submit" className={styles.deleteTaskButton}>
-          Delete task
-        </button>
+        {/* {formType === "edit" && <button type="button">Delete task</button>} */}
         <button type="submit">Save task</button>
       </div>
     </form>

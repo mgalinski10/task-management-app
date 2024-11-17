@@ -5,7 +5,7 @@ import AddTaskForm from "../../components/AddTaskForm/AddTaskForm";
 import { useToday } from "../../context/TodayContext";
 
 const Today = () => {
-  const { isAddForm } = useToday();
+  const { isAddForm, isTaskInfo } = useToday();
   return (
     <div className={styles.container}>
       <section>
