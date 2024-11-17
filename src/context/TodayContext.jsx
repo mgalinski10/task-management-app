@@ -20,7 +20,13 @@ export const TodayPageProvider = ({ children }) => {
 
   return (
     <TodayContext.Provider
-      value={{ tasks, addTask, isAddForm, openAddTaskForm, closeAddForm }}
+      value={{
+        tasks,
+        addTask,
+        isAddForm,
+        openAddTaskForm,
+        closeAddForm,
+      }}
     >
       {children}
     </TodayContext.Provider>

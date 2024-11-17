@@ -30,8 +30,8 @@ const TaskList = () => {
   return (
     <ul className={styles.listWrapper}>
       <AddNewTaskButton />
-      {tasks.map((task, index) => (
-        <TaskItem key={index} taskObj={task} color={addColor(task)} />
+      {tasks.map((task) => (
+        <TaskItem key={task.id} taskObj={task} color={addColor(task)} />
       ))}
     </ul>
   );

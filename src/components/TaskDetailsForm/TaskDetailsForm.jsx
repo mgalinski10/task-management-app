@@ -1,4 +1,4 @@
-import { useToday } from "../../../context/TodayContext";
+import { useToday } from "../../context/TodayContext";
 import styles from "./TaskDetailsForm.module.scss";
 
 const TaskDetailsForm = ({ date, priority, SetPriority, SetDate }) => {
