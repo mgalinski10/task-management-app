@@ -1,18 +1,27 @@
 import styles from "./Today.module.scss";
 import TaskList from "../../components/TaskList/TaskList";
-import AddTaskForm from "../../components/AddTaskForm/AddTaskForm";
+import Form from "../../components/Form/Form";
 
 import { useToday } from "../../context/TodayContext";
 
 const Today = () => {
-  const { isAddForm, isTaskInfo } = useToday();
+  const { isAddNewTaskForm, editingTask, isEditTaskForm } = useToday();
   return (
     <div className={styles.container}>
       <section>
         <h1>Today</h1>
         <TaskList />
       </section>
-      <aside>{isAddForm && <AddTaskForm />}</aside>
+      <aside>
+        {isAddNewTaskForm && <Form />}
+        {isEditTaskForm && (
+          <Form
+            key={editingTask.id}
+            initialData={editingTask}
+            isEditing={true}
+          />
+        )}
+      </aside>
     </div>
   );
 };
