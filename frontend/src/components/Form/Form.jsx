@@ -1,5 +1,6 @@
 import styles from "./Form.module.scss";
 import { useState } from "react";
+import axios from "axios";
 
 import Header from "./Header/Header";
 import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
@@ -11,8 +12,34 @@ const Form = () => {
   const [priority, setPriority] = useState("medium");
   const [date, setDate] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const taskData = {
+      name: taskName,
+      description,
+      priority,
+      date,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/tasks",
+        taskData
+      );
+      console.log("Task created:", response.data);
+
+      setTaskName("");
+      setDescription("");
+      setPriority("medium");
+      setDate("");
+    } catch (error) {
+      console.error("Error creating task:", error);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Header />
       <input
         className={styles.input}

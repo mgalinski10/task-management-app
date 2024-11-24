@@ -2,17 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
 import styles from "./TaskItem.module.scss";
-import { useToday } from "../../../context/TodayContext";
 
 const TaskItem = ({ taskObj, color }) => {
-  const { openEditTaskForm } = useToday();
-
-  const handleClick = () => {
-    openEditTaskForm(taskObj);
-  };
-
   return (
-    <li className={styles.itemContainer} role="button" onClick={handleClick}>
+    <li className={styles.itemContainer} role="button">
       <div className={styles.wrapper}>
         <div className={styles.nameWrapper}>
           <input type="checkbox"></input>
