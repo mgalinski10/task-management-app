@@ -1,11 +1,11 @@
 import styles from "./Header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
 import { useToday } from "../../../context/TodayContext";
 
 const Header = () => {
-  const { closeForm } = useToday();
-
+  const { toggleForm } = useToday();
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Task:</h1>
@@ -13,7 +13,7 @@ const Header = () => {
         className={styles.closeIcon}
         icon={faXmark}
         role="button"
-        onClick={closeForm}
+        onClick={toggleForm}
       />
     </div>
   );
