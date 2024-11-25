@@ -8,9 +8,9 @@ import { useToday } from "../../context/TodayContext";
 import { useState, useEffect } from "react";
 
 const AddNewTaskButton = () => {
-  const { toggleForm } = useToday();
+  const { openForm } = useToday();
   return (
-    <button className={styles.buttonWrapper} role="button" onClick={toggleForm}>
+    <button className={styles.buttonWrapper} role="button" onClick={openForm}>
       <FontAwesomeIcon icon={faPlus} className={styles.icon} />
       <p>Add New Task</p>
     </button>
@@ -18,20 +18,11 @@ const AddNewTaskButton = () => {
 };
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, fetchTasks } = useToday();
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/tasks");
-        setTasks(response.data);
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      }
-    };
-
     fetchTasks();
-  });
+  }, []);
 
   const adjustColor = (task) => {
     const priority = task.priority;

@@ -1,20 +1,39 @@
-import React, { createContext, useState, useContext, act } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import axios from "axios";
 
 const TodayContext = createContext();
 
 export const TodayPageProvider = ({ children }) => {
+  const [tasks, setTasks] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [activeTask, setActiveTask] = useState(null);
 
-  const toggleForm = () => {
-    setIsEditing(false);
-    setActiveTask(null);
-    setIsOpen((prevState) => !prevState);
+  useEffect(() => {
+    if (activeTask) {
+      console.log("Nowe aktywne zadanie:", activeTask);
+    }
+  }, [activeTask]);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/tasks");
+      setTasks(response.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
   };
 
-  const toggleEditForm = (task) => {
-    setIsEditing(true);
+  const openForm = () => {
+    setIsOpen(true);
+    setActiveTask(null);
+  };
+
+  const closeForm = () => {
+    setIsOpen(false);
+    setActiveTask(null);
+  };
+
+  const openEditForm = (task) => {
     setActiveTask(task);
     setIsOpen(true);
   };
@@ -22,11 +41,14 @@ export const TodayPageProvider = ({ children }) => {
   return (
     <TodayContext.Provider
       value={{
-        toggleForm,
+        openForm,
+        closeForm,
         isOpen,
-        toggleEditForm,
-        isEditing,
+        openEditForm,
         activeTask,
+        setActiveTask,
+        tasks,
+        fetchTasks,
       }}
     >
       {children}

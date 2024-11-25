@@ -5,13 +5,13 @@ import styles from "./TaskItem.module.scss";
 import { useToday } from "../../../context/TodayContext";
 
 const TaskItem = ({ taskObj, color }) => {
-  const { toggleEditForm } = useToday();
+  const { openEditForm } = useToday();
 
   return (
     <li
       className={styles.itemContainer}
       role="button"
-      onClick={() => toggleEditForm(taskObj)}
+      onClick={() => openEditForm(taskObj)}
     >
       <div className={styles.wrapper}>
         <div className={styles.nameWrapper}>
