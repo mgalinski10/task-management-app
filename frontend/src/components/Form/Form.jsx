@@ -5,12 +5,15 @@ import axios from "axios";
 import Header from "./Header/Header";
 import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
 import Buttons from "./Buttons/Buttons";
+import { useToday } from "../../context/TodayContext";
 
-const Form = () => {
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("medium");
-  const [date, setDate] = useState("");
+const Form = ({ initialData = {} }) => {
+  const [taskName, setTaskName] = useState(initialData.name || "");
+  const [description, setDescription] = useState(initialData.description || "");
+  const [priority, setPriority] = useState(initialData.priority || "medium");
+  const [date, setDate] = useState(initialData.date || "");
+
+  const { fetchTasks } = useToday();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,16 +26,24 @@ const Form = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/tasks",
-        taskData
-      );
-      console.log("Task created:", response.data);
-
-      setTaskName("");
-      setDescription("");
-      setPriority("medium");
-      setDate("");
+      if (!initialData._id) {
+        const response = await axios.post(
+          "http://localhost:5000/api/tasks",
+          taskData
+        );
+        console.log("Task created:", response.data);
+        setTaskName("");
+        setDescription("");
+        setPriority("medium");
+        setDate("");
+      } else {
+        const response = await axios.put(
+          `http://localhost:5000/api/tasks/${initialData._id}`,
+          taskData
+        );
+        console.log("Task updated:", response.data);
+      }
+      fetchTasks();
     } catch (error) {
       console.error("Error creating task:", error);
     }

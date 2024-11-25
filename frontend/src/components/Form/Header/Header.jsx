@@ -5,7 +5,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useToday } from "../../../context/TodayContext";
 
 const Header = () => {
-  const { toggleForm } = useToday();
+  const { closeForm } = useToday();
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Task:</h1>
@@ -13,7 +13,7 @@ const Header = () => {
         className={styles.closeIcon}
         icon={faXmark}
         role="button"
-        onClick={toggleForm}
+        onClick={closeForm}
       />
     </div>
   );

@@ -21,11 +21,18 @@
 
 .taskMenuItem {
   // width: 100%;
+  a {
+    text-decoration: none;
+    color: inherit;
 
+    &:active {
+      color: inherit;
+    }
+  }
   margin-bottom: 1em;
 
   .itemWrapper {
-    width: 40%;
+    width: 45%;
 
     display: flex;
     align-items: center;
@@ -33,7 +40,7 @@
     padding: 0.5em;
 
     .icon {
-      margin-right: 0.5em;
+      margin-right: 1.5em;
     }
   }
 
@@ -42,13 +49,5 @@
     background-color: $menu-item-hover;
     transition: ease 0.15s;
     border-radius: 1cap;
-  }
-
-  &:first-child {
-    .itemtitle {
-      font-weight: bold;
-    }
-    border-radius: 1cap;
-    background-color: $menu-item-hover;
   }
 }
