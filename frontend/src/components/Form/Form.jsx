@@ -6,11 +6,11 @@ import Header from "./Header/Header";
 import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
 import Buttons from "./Buttons/Buttons";
 
-const Form = () => {
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("medium");
-  const [date, setDate] = useState("");
+const Form = ({ initialData = {} }) => {
+  const [taskName, setTaskName] = useState(initialData.name || "");
+  const [description, setDescription] = useState(initialData.description || "");
+  const [priority, setPriority] = useState(initialData.priority || "medium");
+  const [date, setDate] = useState(initialData.date || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

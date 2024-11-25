@@ -4,7 +4,7 @@ import Form from "../../components/Form/Form";
 import { useToday } from "../../context/TodayContext";
 
 const Today = () => {
-  const { isOpen } = useToday();
+  const { isOpen, isEditing, activeTask } = useToday();
 
   return (
     <div className={styles.container}>
@@ -12,7 +12,10 @@ const Today = () => {
         <h1>Today</h1>
         <TaskList />
       </section>
-      <aside>{isOpen && <Form />}</aside>
+      <aside>
+        {isOpen && !isEditing && <Form />}
+        {isOpen && isEditing && <Form initialData={activeTask} />}
+      </aside>
     </div>
   );
 };

@@ -47,7 +47,7 @@ const TaskList = () => {
     <ul className={styles.listWrapper}>
       <AddNewTaskButton />
       {tasks.map((task) => (
-        <TaskItem taskObj={task} color={adjustColor(task)} />
+        <TaskItem key={task._id} taskObj={task} color={adjustColor(task)} />
       ))}
     </ul>
   );

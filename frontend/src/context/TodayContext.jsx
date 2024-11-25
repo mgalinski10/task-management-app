@@ -1,13 +1,22 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, act } from "react";
 
 const TodayContext = createContext();
 
 export const TodayPageProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [activeTask, setActiveTask] = useState(null);
 
   const toggleForm = () => {
-    console.log("klik");
+    setIsEditing(false);
+    setActiveTask(null);
     setIsOpen((prevState) => !prevState);
+  };
+
+  const toggleEditForm = (task) => {
+    setIsEditing(true);
+    setActiveTask(task);
+    setIsOpen(true);
   };
 
   return (
@@ -15,6 +24,9 @@ export const TodayPageProvider = ({ children }) => {
       value={{
         toggleForm,
         isOpen,
+        toggleEditForm,
+        isEditing,
+        activeTask,
       }}
     >
       {children}
