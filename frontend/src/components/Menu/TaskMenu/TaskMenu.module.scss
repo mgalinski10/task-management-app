@@ -20,7 +20,6 @@
 }
 
 .taskMenuItem {
-  // width: 100%;
   a {
     text-decoration: none;
     color: inherit;
@@ -45,6 +44,13 @@
   }
 
   &:hover {
+    cursor: pointer;
+    background-color: $menu-item-hover;
+    transition: ease 0.15s;
+    border-radius: 1cap;
+  }
+
+  &.active {
     cursor: pointer;
     background-color: $menu-item-hover;
     transition: ease 0.15s;

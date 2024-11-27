@@ -1,13 +1,36 @@
 .calendar-container {
   section {
     h1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 1em;
       font-size: 2em;
     }
   }
 
   .sx-react-calendar-wrapper {
-    height: 80vh;
+    height: 700px;
     width: 75vw;
+  }
+}
+
+.add-event-btn {
+  background-color: inherit;
+  padding: 0.7em;
+
+  font-size: 0.5em;
+
+  border: 1px solid rgb(220, 217, 217);
+  border-radius: 1cap;
+
+  &:hover {
+    background-color: rgb(254, 215, 19);
+    cursor: pointer;
+    transition: ease 0.25s;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }

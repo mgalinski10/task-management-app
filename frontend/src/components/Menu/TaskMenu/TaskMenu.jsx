@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./TaskMenu.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 const TaskMenuItem = ({ title, to, icon }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
   return (
-    <li className={styles.taskMenuItem}>
+    <li className={`${styles.taskMenuItem} ${isActive ? styles.active : ""}`}>
       <Link to={to}>
         <div className={styles.itemWrapper}>
           <FontAwesomeIcon icon={icon} className={styles.icon} />
