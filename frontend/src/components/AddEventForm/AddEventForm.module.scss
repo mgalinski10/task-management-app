@@ -1,0 +1,96 @@
+@import "../../styles/variables";
+
+.container {
+  height: 500px;
+  width: 500px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 1em;
+
+  background-color: $background-color;
+
+  border-radius: 2cap;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  font-family: inherit;
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header {
+      font-size: 1.4em;
+      margin: 0;
+    }
+
+    .closeIcon {
+      font-size: 1.8em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  input {
+    background-color: inherit;
+    width: 400px;
+
+    font-size: 1.1em;
+    font-family: inherit;
+    padding: 0.3em;
+
+    border-radius: 0.5cap;
+    border: 1px solid rgb(220, 217, 217);
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgb(220, 217, 217);
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1em;
+
+      p {
+        width: 20%;
+      }
+
+      input {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  button {
+    background-color: rgb(254, 215, 19);
+
+    width: 45%;
+    padding: 0.7em;
+
+    font-size: 1em;
+    font-weight: bolder;
+
+    border: 1px solid rgb(220, 217, 217);
+    border-radius: 1cap;
+
+    &:hover {
+      cursor: pointer;
+      transition: ease 0.25s;
+      transform: scale(0.98);
+    }
+  }
+}

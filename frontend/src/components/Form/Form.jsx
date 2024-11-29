@@ -50,7 +50,7 @@ const Form = ({ initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.mainForm}>
       <Header />
       <input
         className={styles.input}

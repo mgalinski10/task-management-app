@@ -2,14 +2,20 @@ import "./Calendar.scss";
 import { ScheduleXCalendar } from "@schedule-x/react";
 import { viewWeek, viewMonthGrid, createCalendar } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-
+import { createDragAndDropPlugin } from "@schedule-x/drag-and-drop";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
 import "@schedule-x/theme-default/dist/index.css";
+
+import AddEventForm from "../../components/AddEventForm/AddEventForm";
 
 const eventsServicePlugin = createEventsServicePlugin();
 
 const Calendar = () => {
-  const plugins = [createEventModalPlugin(), eventsServicePlugin];
+  const plugins = [
+    createEventModalPlugin(),
+    eventsServicePlugin,
+    createDragAndDropPlugin(),
+  ];
 
   const config = {
     dayBoundaries: {
@@ -88,11 +94,13 @@ const Calendar = () => {
         <h1>
           Calendar
           <button class="add-event-btn">Add Event</button>
+          ``{" "}
         </h1>
-        <ScheduleXCalendar
+        {/* <ScheduleXCalendar
           className="sx-react-calendar-wrapper"
           calendarApp={calendar}
-        />
+        /> */}
+        <AddEventForm />
       </section>
     </div>
   );
