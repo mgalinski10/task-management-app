@@ -7,10 +7,13 @@ import { createEventModalPlugin } from "@schedule-x/event-modal";
 import "@schedule-x/theme-default/dist/index.css";
 
 import AddEventForm from "../../components/AddEventForm/AddEventForm";
+import { useCalendar } from "../../context/CalendarContext";
 
 const eventsServicePlugin = createEventsServicePlugin();
 
 const Calendar = () => {
+  const { isOpen, openForm, closeForm } = useCalendar();
+
   const plugins = [
     createEventModalPlugin(),
     eventsServicePlugin,
@@ -93,14 +96,17 @@ const Calendar = () => {
       <section>
         <h1>
           Calendar
-          <button class="add-event-btn">Add Event</button>
-          ``{" "}
+          <button class="add-event-btn" onClick={openForm}>
+            Add Event
+          </button>
         </h1>
-        {/* <ScheduleXCalendar
-          className="sx-react-calendar-wrapper"
-          calendarApp={calendar}
-        /> */}
-        <AddEventForm />
+        {!isOpen && (
+          <ScheduleXCalendar
+            className="sx-react-calendar-wrapper"
+            calendarApp={calendar}
+          />
+        )}
+        {isOpen && <AddEventForm />}
       </section>
     </div>
   );
