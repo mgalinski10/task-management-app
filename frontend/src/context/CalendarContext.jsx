@@ -1,53 +1,21 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 
 const CalendarContext = createContext();
 
 export const CalendarPageProvider = ({ children }) => {
-  const [events, setEvents] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/events");
-        const fetchedEvents = response.data.map((event) => ({
-          id: event._id,
-          title: event.eventName,
-          start: event.start,
-          end: event.end,
-        }));
-
-        setEvents(fetchedEvents);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  // Funkcja dodająca nowy event
-  const addEvent = async (newEvent) => {
+  const fetchEvents = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/events",
-        newEvent
-      );
-      const createdEvent = {
-        id: response.data._id,
-        title: response.data.eventName,
-        start: response.data.start,
-        end: response.data.end,
-      };
-
-      // Aktualizacja lokalnego stanu
-      setEvents((prevEvents) => [...prevEvents, createdEvent]);
+      const response = await axios.get("http://localhost:5000/api/events");
+      setEvents(response.data);
     } catch (error) {
-      console.error("Error adding event:", error);
+      console.error("Error fetching tasks:", error);
+    } finally {
+      setLoadingEvents(false);
     }
   };
 
@@ -61,7 +29,14 @@ export const CalendarPageProvider = ({ children }) => {
 
   return (
     <CalendarContext.Provider
-      value={{ closeForm, openForm, isOpen, events, loading, addEvent }}
+      value={{
+        closeForm,
+        openForm,
+        isOpen,
+        events,
+        fetchEvents,
+        loadingEvents,
+      }}
     >
       {children}
     </CalendarContext.Provider>

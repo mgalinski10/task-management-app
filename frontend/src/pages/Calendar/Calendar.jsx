@@ -1,53 +1,33 @@
-import React, { useState, useEffect } from "react";
 import "./Calendar.scss";
-import { ScheduleXCalendar } from "@schedule-x/react";
-import { viewMonthGrid, createCalendar } from "@schedule-x/calendar";
-import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createDragAndDropPlugin } from "@schedule-x/drag-and-drop";
-import { createEventModalPlugin } from "@schedule-x/event-modal";
 import "@schedule-x/theme-default/dist/index.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import AddEventForm from "../../components/AddEventForm/AddEventForm";
 import { useCalendar } from "../../context/CalendarContext";
-
-const eventsServicePlugin = createEventsServicePlugin();
+import { viewMonthGrid } from "@schedule-x/calendar";
+import { ScheduleXCalendar, useCalendarApp } from "@schedule-x/react";
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createEventModalPlugin } from "@schedule-x/event-modal";
 
 const Calendar = () => {
-  const { isOpen, openForm, events, loading } = useCalendar();
+  const { isOpen, openForm, events, fetchEvents, loadingEvents } =
+    useCalendar();
 
-  const plugins = [
-    createEventModalPlugin(),
-    eventsServicePlugin,
-    createDragAndDropPlugin(),
-  ];
+  const eventsService = createEventsServicePlugin();
+
+  useEffect(() => {
+    if (!loadingEvents) {
+      fetchEvents();
+    }
+  }, [events]);
 
   const config = {
-    dayBoundaries: {
-      start: "06:00",
-      end: "18:00",
-    },
-    callbacks: {
-      onEventUpdate(updatedEvent) {
-        console.log("onEventUpdate", updatedEvent);
-      },
-      onEventClick(calendarEvent) {
-        console.log("onEventClick", calendarEvent);
-      },
-    },
     views: [viewMonthGrid],
-    weekOptions: {
-      gridHeight: 850,
-      nDays: 6,
-      eventWidth: 90,
-      timeAxisFormatOptions: { hour: "2-digit", minute: "2-digit" },
-    },
     events: events,
+    plugins: [eventsService, createEventModalPlugin()],
   };
 
-  const calendar = createCalendar(config, plugins);
-
-  if (loading) {
-    return <div>Loading events...</div>; // Komunikat ładowania
-  }
+  const calendar = useCalendarApp(config);
 
   return (
     <div className="calendar-container">
@@ -58,7 +38,8 @@ const Calendar = () => {
             Add Event
           </button>
         </h1>
-        {!isOpen && (
+        {loadingEvents && <div>Loading calendar...</div>}
+        {!isOpen && !loadingEvents && (
           <ScheduleXCalendar
             className="sx-react-calendar-wrapper"
             calendarApp={calendar}

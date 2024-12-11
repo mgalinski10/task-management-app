@@ -2,12 +2,11 @@ const Event = require("../models/eventModel");
 
 const createEvent = async (req, res) => {
   try {
-    const { eventName, eventDescription, eventLocation, start, end } = req.body;
+    const { title, location, start, end } = req.body;
 
     const event = new Event({
-      eventName,
-      eventDescription,
-      eventLocation,
+      title,
+      location,
       start,
       end,
     });
@@ -23,8 +22,17 @@ const createEvent = async (req, res) => {
 const getAllEvents = async (req, res) => {
   try {
     const events = await Event.find();
-    console.log(`Available events: ${events}`);
-    res.status(200).json(events);
+    const readyEvents = events.map((event) => {
+      return {
+        id: event._id,
+        title: event.title,
+        location: event.location,
+        start: event.start,
+        end: event.end,
+      };
+    });
+    console.log(`Available events: ${readyEvents}`);
+    res.status(200).json(readyEvents);
   } catch (error) {
     res.status(500).json({ message: "Error fetching events", error });
   }

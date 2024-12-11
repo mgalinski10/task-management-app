@@ -3,19 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCalendar } from "../../context/CalendarContext";
 import { useState } from "react";
+import axios from "axios";
 
 const AddEventForm = () => {
-  const { closeForm, addEvent } = useCalendar(); // Wyciągamy addEvent z contextu
+  const { closeForm, fetchEvents } = useCalendar();
 
-  const [eventName, setEventName] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
+  const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
   const resetForm = () => {
-    setEventName("");
-    setEventDescription("");
+    setTitle("");
     setLocation("");
     setStart("");
     setEnd("");
@@ -24,20 +23,24 @@ const AddEventForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newEvent = {
-      eventName,
-      eventDescription,
-      eventLocation: location,
+    const eventData = {
+      title,
+      location,
       start,
       end,
     };
 
     try {
-      await addEvent(newEvent); // Dodajemy event do backendu i lokalnego stanu
+      const response = await axios.post(
+        "http://localhost:5000/api/events",
+        eventData
+      );
+      console.log("Event created:", response.data);
       resetForm();
-      closeForm(); // Zamykamy formularz
+      fetchEvents();
+      closeForm();
     } catch (error) {
-      console.error("Error creating event:", error);
+      console.error("Error creating task:", error);
     }
   };
 
@@ -55,14 +58,8 @@ const AddEventForm = () => {
       <input
         type="text"
         placeholder="Type Event Name"
-        value={eventName}
-        onChange={(e) => setEventName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Type Event Description"
-        value={eventDescription}
-        onChange={(e) => setEventDescription(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <input
         type="text"
