@@ -1,11 +1,10 @@
 import styles from "./TaskList.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 import TaskItem from "./TaskItem/TaskItem";
 import { useToday } from "../../context/TodayContext";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const AddNewTaskButton = () => {
   const { openForm } = useToday();
