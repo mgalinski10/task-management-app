@@ -36,8 +36,9 @@ const AddEventForm = () => {
         eventData
       );
       console.log("Event created:", response.data);
-      resetForm();
+
       fetchEvents();
+      resetForm();
       closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
