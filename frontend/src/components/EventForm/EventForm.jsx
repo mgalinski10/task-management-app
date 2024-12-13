@@ -1,11 +1,12 @@
-import styles from "./AddEventForm.module.scss";
+import styles from "./EventForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCalendar } from "../../context/CalendarContext";
 import { useState } from "react";
 import axios from "axios";
+import Button from "../Button/Button";
 
-const AddEventForm = () => {
+const EventForm = () => {
   const { closeForm, fetchEvents } = useCalendar();
 
   const [title, setTitle] = useState("");
@@ -31,11 +32,7 @@ const AddEventForm = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/events",
-        eventData
-      );
-      console.log("Event created:", response.data);
+      await axios.post("http://localhost:5000/api/events", eventData);
 
       fetchEvents();
       resetForm();
@@ -86,9 +83,9 @@ const AddEventForm = () => {
           />
         </li>
       </ul>
-      <button type="submit">Add to calendar</button>
+      <Button type="submit">Save to Calendar</Button>
     </form>
   );
 };
 
-export default AddEventForm;
+export default EventForm;

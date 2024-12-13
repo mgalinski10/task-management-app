@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Header from "./Header/Header";
 import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
-import Buttons from "./Buttons/Buttons";
+import FormControl from "./FormControl/FormControl";
 import { useToday } from "../../context/TodayContext";
 
 const Form = ({ initialData = {} }) => {
@@ -74,7 +74,7 @@ const Form = ({ initialData = {} }) => {
         setPriority={setPriority}
       />
 
-      <Buttons />
+      <FormControl />
     </form>
   );
 };

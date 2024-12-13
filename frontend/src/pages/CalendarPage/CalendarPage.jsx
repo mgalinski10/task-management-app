@@ -1,4 +1,4 @@
-import AddEventForm from "../../components/AddEventForm/AddEventForm";
+import EventForm from "../../components/EventForm/EventForm";
 import Calendar from "../../components/Calendar/Calendar";
 import { useCalendar } from "../../context/CalendarContext";
 import "./CalendarPage.scss";
@@ -19,7 +19,7 @@ const CalendarPage = () => {
         {!isOpen && !loadingEvents && (
           <Calendar events={events} key={events.length} />
         )}
-        {isOpen && <AddEventForm />}
+        {isOpen && <EventForm />}
       </section>
     </div>
   );

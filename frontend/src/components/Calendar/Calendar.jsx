@@ -4,13 +4,21 @@ import { viewMonthGrid } from "@schedule-x/calendar";
 import { ScheduleXCalendar, useCalendarApp } from "@schedule-x/react";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
+import { useCalendar } from "../../context/CalendarContext";
 
 const eventsService = createEventsServicePlugin();
 
 const Calendar = ({ events }) => {
+  const { openForm } = useCalendar();
+
   const config = {
     views: [viewMonthGrid],
     events,
+    callbacks: {
+      onDoubleClickEvent(calendarEvent) {
+        openForm();
+      },
+    },
     plugins: [eventsService, createEventModalPlugin()],
   };
 
