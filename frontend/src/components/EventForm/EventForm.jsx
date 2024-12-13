@@ -1,18 +1,16 @@
 import styles from "./EventForm.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useCalendar } from "../../context/CalendarContext";
-import { useState } from "react";
 import axios from "axios";
-import Button from "../Button/Button";
+import { useState } from "react";
+import { useCalendar } from "../../context/CalendarContext";
+import Form from "../Form/Form";
 
-const EventForm = () => {
+const EventForm = ({ initialData = {} }) => {
   const { closeForm, fetchEvents } = useCalendar();
 
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
+  const [title, setTitle] = useState(initialData.title || "");
+  const [location, setLocation] = useState(initialData.location || "");
+  const [start, setStart] = useState(initialData.start || "");
+  const [end, setEnd] = useState(initialData.end || "");
 
   const resetForm = () => {
     setTitle("");
@@ -21,10 +19,23 @@ const EventForm = () => {
     setEnd("");
   };
 
+  const isEdit = initialData && initialData.id;
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/api/events/${initialData._id}`);
+      await fetchEvents();
+      resetForm();
+      closeForm();
+    } catch (error) {
+      console.error("Error deleting Event:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const eventData = {
+    const event = {
       title,
       location,
       start,
@@ -32,27 +43,37 @@ const EventForm = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/events", eventData);
+      if (!initialData.id) {
+        await axios.post("http://localhost:5000/api/events", event);
 
+        // fetchEvents();
+        resetForm();
+      } else {
+        await axios.put(
+          `http://localhost:5000/api/events/${initialData._id}`,
+          event
+        );
+      }
       fetchEvents();
-      resetForm();
-      closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
     }
   };
 
+  const handleCloseForm = () => {
+    closeForm();
+  };
+
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <div className={styles.wrapper}>
-        <h1 className={styles.header}>Event:</h1>
-        <FontAwesomeIcon
-          className={styles.closeIcon}
-          icon={faXmark}
-          role="button"
-          onClick={closeForm}
-        />
-      </div>
+    <Form
+      title="Event"
+      isEdit={isEdit}
+      actionBtnTitle="Save Event"
+      deleteBtnTitle="Delete Event"
+      onSubmit={handleSubmit}
+      onDelete={handleDelete}
+      onCloseForm={handleCloseForm}
+    >
       <input
         type="text"
         placeholder="Type Event Name"
@@ -83,8 +104,7 @@ const EventForm = () => {
           />
         </li>
       </ul>
-      <Button type="submit">Save to Calendar</Button>
-    </form>
+    </Form>
   );
 };
 

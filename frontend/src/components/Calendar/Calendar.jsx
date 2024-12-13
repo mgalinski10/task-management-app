@@ -9,14 +9,15 @@ import { useCalendar } from "../../context/CalendarContext";
 const eventsService = createEventsServicePlugin();
 
 const Calendar = ({ events }) => {
-  const { openForm } = useCalendar();
+  const { openEditForm } = useCalendar();
 
   const config = {
     views: [viewMonthGrid],
     events,
     callbacks: {
-      onDoubleClickEvent(calendarEvent) {
-        openForm();
+      onDoubleClickEvent(event) {
+        console.log(event);
+        openEditForm(event);
       },
     },
     plugins: [eventsService, createEventModalPlugin()],

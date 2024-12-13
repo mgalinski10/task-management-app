@@ -7,6 +7,7 @@ export const CalendarPageProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
+  const [activeEvent, setActiveEvent] = useState(null);
 
   const fetchEvents = async () => {
     try {
@@ -23,6 +24,11 @@ export const CalendarPageProvider = ({ children }) => {
     fetchEvents();
   }, []);
 
+  const openEditForm = (event) => {
+    setActiveEvent(event);
+    setIsOpen(true);
+  };
+
   const openForm = () => {
     setIsOpen(true);
   };
@@ -36,10 +42,12 @@ export const CalendarPageProvider = ({ children }) => {
       value={{
         closeForm,
         openForm,
+        openEditForm,
         isOpen,
         events,
         fetchEvents,
         loadingEvents,
+        activeEvent,
       }}
     >
       {children}
