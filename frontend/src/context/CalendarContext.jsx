@@ -31,10 +31,12 @@ export const CalendarPageProvider = ({ children }) => {
 
   const openForm = () => {
     setIsOpen(true);
+    setActiveEvent(null);
   };
 
   const closeForm = () => {
     setIsOpen(false);
+    setActiveEvent(null);
   };
 
   return (

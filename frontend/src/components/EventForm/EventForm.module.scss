@@ -17,10 +17,10 @@ input {
   }
 }
 
-ul {
+.eventLabels {
   list-style: none;
 
-  li {
+  .eventLabel {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
@@ -29,7 +29,7 @@ ul {
       width: 20%;
     }
 
-    input {
+    .dateInput {
       text-transform: uppercase;
     }
   }

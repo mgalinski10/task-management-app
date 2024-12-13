@@ -6,7 +6,7 @@ import Form from "../Form/Form";
 
 const EventForm = ({ initialData = {} }) => {
   const { closeForm, fetchEvents } = useCalendar();
-
+  console.log(initialData);
   const [title, setTitle] = useState(initialData.title || "");
   const [location, setLocation] = useState(initialData.location || "");
   const [start, setStart] = useState(initialData.start || "");
@@ -23,7 +23,7 @@ const EventForm = ({ initialData = {} }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${initialData._id}`);
+      await axios.delete(`http://localhost:5000/api/events/${initialData.id}`);
       await fetchEvents();
       resetForm();
       closeForm();
@@ -46,15 +46,15 @@ const EventForm = ({ initialData = {} }) => {
       if (!initialData.id) {
         await axios.post("http://localhost:5000/api/events", event);
 
-        // fetchEvents();
         resetForm();
       } else {
         await axios.put(
-          `http://localhost:5000/api/events/${initialData._id}`,
+          `http://localhost:5000/api/events/${initialData.id}`,
           event
         );
       }
-      fetchEvents();
+      await fetchEvents();
+      closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
     }
@@ -74,22 +74,29 @@ const EventForm = ({ initialData = {} }) => {
       onDelete={handleDelete}
       onCloseForm={handleCloseForm}
     >
-      <input
-        type="text"
-        placeholder="Type Event Name"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Type Event Location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-      <ul>
+      <ul className={styles.eventLabels}>
+        <li>
+          <p>Name</p>
+          <input
+            type="text"
+            placeholder="Type Event Name"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </li>
+        <li>
+          <p>Location</p>
+          <input
+            type="text"
+            placeholder="Type Event Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </li>
         <li>
           <p>Start</p>
           <input
+            className={styles.dateInput}
             type="date"
             value={start}
             onChange={(e) => setStart(e.target.value)}
@@ -98,6 +105,7 @@ const EventForm = ({ initialData = {} }) => {
         <li>
           <p>End</p>
           <input
+            className={styles.dateInput}
             type="date"
             value={end}
             onChange={(e) => setEnd(e.target.value)}

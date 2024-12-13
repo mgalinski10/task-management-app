@@ -5,7 +5,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const Header = ({ title, onCloseForm }) => {
   return (
     <div className={styles.wrapper}>
-      <h1>{title}</h1>
+      <h1 className={styles.header}>{title}</h1>
       <FontAwesomeIcon
         className={styles.icon}
         icon={faXmark}
