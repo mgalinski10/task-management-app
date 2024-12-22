@@ -26,6 +26,7 @@ const TaskMenu = () => {
       <ul className={styles.listWrapper}>
         <TaskMenuItem title="Today" to="/" icon={faListCheck} />
         <TaskMenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
+        <TaskMenuItem title="Sticky notes" to="/stickynotes" icon={faListCheck}/>
       </ul>
     </div>
   );
