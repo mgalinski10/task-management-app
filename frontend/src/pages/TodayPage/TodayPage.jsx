@@ -1,4 +1,4 @@
-import styles from "./Today.module.scss";
+import styles from "./TodayPage.module.scss";
 import TaskList from "../../components/TaskList/TaskList";
 import TaskForm from "../../components/TaskForm/TaskForm";
 import PageTitle from "../../components/PageTitle/PageTitle";

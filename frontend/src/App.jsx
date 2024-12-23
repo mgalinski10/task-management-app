@@ -1,9 +1,9 @@
 import styles from "./App.module.scss";
 import Menu from "./components/Menu/Menu";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Today from "./pages/Today/Today";
+import TodayPage from "./pages/TodayPage/TodayPage";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
-import StickyNotesPage from "./pages/StickyNotesPage/StickyNotesPage"
+import StickyWallPage from "./pages/StickyWallPage/StickyWallPage";
 
 const App = () => {
   return (
@@ -11,9 +11,9 @@ const App = () => {
       <div className={styles.container}>
         <Menu />
         <Routes>
-          <Route path="/" element={<Today />} />
+          <Route path="/" element={<TodayPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/stickynotes" element={<StickyNotesPage />} />
+          <Route path="/stickywall" element={<StickyWallPage />} />
         </Routes>
       </div>
     </BrowserRouter>

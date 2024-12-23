@@ -1,14 +1,8 @@
 .container {
-  .notesContainer {
+  .stickyWall {
     display: grid;
     grid-template-columns: repeat(3, 400px);
     grid-template-rows: repeat(2, 350px);
     gap: 5em;
-
-    .noteItem {
-      padding: 1em;
-      background-color: rgb(255, 255, 216);
-      border-radius: 1cap;
-    }
   }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useToday } from "../../context/TodayContext";
 
-import TaskDetailsForm from "../TaskDetailsForm/TaskDetailsForm";
+import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 import Form from "../Form/Form";
 
 const TaskForm = ({ initialData = {} }) => {

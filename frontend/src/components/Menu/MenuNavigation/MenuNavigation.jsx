@@ -1,7 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import styles from "./TaskMenu.module.scss";
+import styles from "./MenuNavigation.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListCheck, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import {
+  faListCheck,
+  faCalendarDays,
+  faNoteSticky,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TaskMenuItem = ({ title, to, icon }) => {
   const location = useLocation();
@@ -26,7 +30,11 @@ const TaskMenu = () => {
       <ul className={styles.listWrapper}>
         <TaskMenuItem title="Today" to="/" icon={faListCheck} />
         <TaskMenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
-        <TaskMenuItem title="Sticky notes" to="/stickynotes" icon={faListCheck}/>
+        <TaskMenuItem
+          title="Sticky Wall"
+          to="/stickywall"
+          icon={faNoteSticky}
+        />
       </ul>
     </div>
   );
