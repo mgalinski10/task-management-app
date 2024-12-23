@@ -1,0 +1,13 @@
+.container {
+  background-color: rgb(243, 243, 243);
+  border-radius: 1cap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(0.97);
+    transition: 0.15s ease;
+  }
+}

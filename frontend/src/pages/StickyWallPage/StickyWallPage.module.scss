@@ -1,0 +1,8 @@
+.container {
+  .stickyWall {
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(2, 350px);
+    gap: 5em;
+  }
+}

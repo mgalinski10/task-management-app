@@ -11,11 +11,12 @@
   }
 }
 
-.mainForm {
+.container {
   transform: scale(0.9);
   animation: fadeIn 0.3s ease forwards;
   background-color: $background-color;
   min-height: 500px;
+  width: 450px;
 
   padding: 1em;
   border-radius: 2cap;
@@ -24,37 +25,6 @@
   flex-direction: column;
   justify-content: space-around;
 
-  .input {
-    font-family: inherit;
-
-    background-color: inherit;
-    width: 400px;
-
-    font-size: 1.1em;
-    padding: 0.3em;
-
-    border-radius: 0.5cap;
-    border: 1px solid rgb(220, 217, 217);
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgb(220, 217, 217);
-    }
-  }
-
-  .description {
-    background-color: inherit;
-    font-family: inherit;
-
-    font-size: 1.1em;
-    padding: 0.3em;
-
-    border-radius: 0.5cap;
-    border: 1px solid rgb(220, 217, 217);
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgb(220, 217, 217);
-    }
-  }
+  margin-right: auto;
+  margin-left: auto;
 }

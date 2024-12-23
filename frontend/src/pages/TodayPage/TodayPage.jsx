@@ -1,6 +1,7 @@
-import styles from "./Today.module.scss";
+import styles from "./TodayPage.module.scss";
 import TaskList from "../../components/TaskList/TaskList";
-import Form from "../../components/Form/Form";
+import TaskForm from "../../components/TaskForm/TaskForm";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import { useToday } from "../../context/TodayContext";
 
 const Today = () => {
@@ -9,13 +10,13 @@ const Today = () => {
   return (
     <div className={styles.container}>
       <section>
-        <h1>Today</h1>
+        <PageTitle title="Today" />
         <TaskList />
       </section>
       <aside>
-        {isOpen && !activeTask && <Form />}
+        {isOpen && !activeTask && <TaskForm />}
         {isOpen && activeTask && (
-          <Form key={activeTask._id} initialData={activeTask} />
+          <TaskForm key={activeTask._id} initialData={activeTask} />
         )}
       </aside>
     </div>

@@ -1,5 +1,5 @@
 import styles from "./Menu.module.scss";
-import TaskMenu from "./TaskMenu/TaskMenu";
+import TaskMenu from "./MenuNavigation/MenuNavigation";
 
 const Menu = () => {
   return (

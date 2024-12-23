@@ -8,12 +8,6 @@ export const TodayPageProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTask, setActiveTask] = useState(null);
 
-  useEffect(() => {
-    if (activeTask) {
-      console.log("Nowe aktywne zadanie:", activeTask);
-    }
-  }, [activeTask]);
-
   const fetchTasks = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/tasks");

@@ -2,18 +2,15 @@ import styles from "./Header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import { useToday } from "../../../context/TodayContext";
-
-const Header = () => {
-  const { closeForm } = useToday();
+const Header = ({ title, onCloseForm }) => {
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.header}>Task:</h1>
+      <h1 className={styles.header}>{title}</h1>
       <FontAwesomeIcon
-        className={styles.closeIcon}
+        className={styles.icon}
         icon={faXmark}
         role="button"
-        onClick={closeForm}
+        onClick={onCloseForm}
       />
     </div>
   );

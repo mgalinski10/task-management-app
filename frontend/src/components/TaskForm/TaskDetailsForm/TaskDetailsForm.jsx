@@ -20,7 +20,12 @@ const TaskDetailsForm = ({ date, priority, setPriority, setDate }) => {
       </li>
       <li className={styles.item}>
         <p>Due date</p>
-        <input type="date" value={date} onChange={handleDateChange} />
+        <input
+          className={styles.date}
+          type="date"
+          value={date}
+          onChange={handleDateChange}
+        />
       </li>
     </ul>
   );
