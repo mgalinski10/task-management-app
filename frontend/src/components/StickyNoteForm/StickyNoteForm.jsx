@@ -6,10 +6,11 @@ import { useStickyWall } from "../../context/StickyWallContext";
 
 const StickyNoteForm = ({ initialData = {} }) => {
   const { closeForm, fetchNotes } = useStickyWall();
-  const isEdit = initialData && initialData.id;
 
   const [title, setTitle] = useState(initialData.title || "");
   const [content, setContent] = useState(initialData.content || "");
+
+  const isEdit = initialData && initialData._id;
 
   const resetForm = () => {
     setTitle("");
@@ -19,7 +20,9 @@ const StickyNoteForm = ({ initialData = {} }) => {
   const handleDelete = async () => {
     try {
       if (isEdit) {
-        await axios.delete(`http://localhost:5000/api/notes/${initialData.id}`);
+        await axios.delete(
+          `http://localhost:5000/api/notes/${initialData._id}`
+        );
         await fetchNotes();
         resetForm();
         closeForm();
@@ -42,7 +45,7 @@ const StickyNoteForm = ({ initialData = {} }) => {
         await axios.post("http://localhost:5000/api/notes", note);
       } else {
         await axios.put(
-          `http://localhost:5000/api/notes/${initialData.id}`,
+          `http://localhost:5000/api/notes/${initialData._id}`,
           note
         );
       }

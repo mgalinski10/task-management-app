@@ -28,10 +28,12 @@ export const StickyWallPageProvider = ({ children }) => {
 
   const openForm = () => {
     setIsOpen(true);
+    setActiveNote(null);
   };
 
   const closeForm = () => {
     setIsOpen(false);
+    setActiveNote(null);
   };
 
   return (

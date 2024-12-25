@@ -20,6 +20,7 @@ const StickyNotesPage = () => {
                   key={note._id}
                   title={note.title}
                   content={note.content}
+                  noteObj={note}
                 />
               );
             })}
