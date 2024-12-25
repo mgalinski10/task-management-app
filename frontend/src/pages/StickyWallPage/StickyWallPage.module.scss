@@ -1,4 +1,5 @@
 .container {
+  flex: 1;
   .stickyWall {
     display: grid;
     grid-template-columns: repeat(3, 400px);

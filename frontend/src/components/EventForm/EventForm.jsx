@@ -6,7 +6,6 @@ import Form from "../Form/Form";
 
 const EventForm = ({ initialData = {} }) => {
   const { closeForm, fetchEvents } = useCalendar();
-  console.log(initialData);
   const [title, setTitle] = useState(initialData.title || "");
   const [location, setLocation] = useState(initialData.location || "");
   const [start, setStart] = useState(initialData.start || "");
