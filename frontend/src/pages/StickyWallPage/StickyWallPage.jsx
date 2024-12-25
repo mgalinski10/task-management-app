@@ -6,25 +6,30 @@ import StickyNoteForm from "../../components/StickyNoteForm/StickyNoteForm";
 import { useStickyWall } from "../../context/StickyWallContext";
 
 const StickyNotesPage = () => {
-  const { isOpen, openForm } = useStickyWall();
+  const { isOpen, openForm, notes, activeNote } = useStickyWall();
 
-  const handleClick = () => {
-    openForm();
-  };
   return (
     <div className={styles.container}>
       <section>
         <PageTitle title="Sticky Wall" />
         {!isOpen && (
           <div className={styles.stickyWall}>
-            <StickyNote
-              title="Social Media"
-              content="Social media platforms like Facebook, Instagram, and Twitter allow people to connect, share ideas, and build communities. Remember to use them wisely and maintain a balance between online and offline life."
-            />
-            <AddStickyNote onClick={handleClick} />
+            {notes.map((note) => {
+              return (
+                <StickyNote
+                  key={note._id}
+                  title={note.title}
+                  content={note.content}
+                />
+              );
+            })}
+            <AddStickyNote onClick={openForm} />
           </div>
         )}
-        {isOpen && <StickyNoteForm />}
+        {isOpen && !activeNote && <StickyNoteForm />}
+        {isOpen && activeNote && (
+          <StickyNoteForm key={activeNote._id} initialData={activeNote} />
+        )}
       </section>
     </div>
   );

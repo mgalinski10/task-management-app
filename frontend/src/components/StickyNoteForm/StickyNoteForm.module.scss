@@ -1,17 +1,21 @@
-.content {
-  background-color: inherit;
-  width: 400px;
-  height: 200px;
+.noteLabels {
+  list-style: none;
+  .content {
+    background-color: inherit;
+    width: 400px;
+    height: 200px;
 
-  font-size: 1.1em;
-  font-family: inherit;
-  padding: 0.3em;
+    font-size: 1.1em;
+    font-family: inherit;
+    padding: 0.3em;
 
-  border-radius: 0.5cap;
-  border: 1px solid rgb(220, 217, 217);
+    border-radius: 0.5cap;
+    border: 1px solid rgb(220, 217, 217);
+    margin-top: 2em;
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgb(220, 217, 217);
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgb(220, 217, 217);
+    }
   }
 }

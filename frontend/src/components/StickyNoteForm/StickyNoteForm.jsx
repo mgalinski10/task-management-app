@@ -1,10 +1,59 @@
+import React, { useState } from "react";
 import styles from "./StickyNoteForm.module.scss";
+import axios from "axios";
 import Form from "../Form/Form";
 import { useStickyWall } from "../../context/StickyWallContext";
 
 const StickyNoteForm = ({ initialData = {} }) => {
-  const { closeForm } = useStickyWall();
+  const { closeForm, fetchNotes } = useStickyWall();
   const isEdit = initialData && initialData.id;
+
+  const [title, setTitle] = useState(initialData.title || "");
+  const [content, setContent] = useState(initialData.content || "");
+
+  const resetForm = () => {
+    setTitle("");
+    setContent("");
+  };
+
+  const handleDelete = async () => {
+    try {
+      if (isEdit) {
+        await axios.delete(`http://localhost:5000/api/notes/${initialData.id}`);
+        await fetchNotes();
+        resetForm();
+        closeForm();
+      }
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const note = {
+      title,
+      content,
+    };
+
+    try {
+      if (!isEdit) {
+        await axios.post("http://localhost:5000/api/notes", note);
+      } else {
+        await axios.put(
+          `http://localhost:5000/api/notes/${initialData.id}`,
+          note
+        );
+      }
+
+      await fetchNotes();
+      resetForm();
+      closeForm();
+    } catch (error) {
+      console.error("Error saving note:", error);
+    }
+  };
 
   const handleCloseForm = () => {
     closeForm();
@@ -14,19 +63,31 @@ const StickyNoteForm = ({ initialData = {} }) => {
     <Form
       title="Sticky Note"
       isEdit={isEdit}
-      actionBtnTitle="Save note"
-      deleteBtnTitle="Delete note"
-      //   onDelete={handleDelete}
-      //   onSubmit={handleSubmit}
+      actionBtnTitle={"Save note"}
+      deleteBtnTitle={"Delete note"}
+      onSubmit={handleSubmit}
+      onDelete={handleDelete}
       onCloseForm={handleCloseForm}
     >
-      <input placeholder="Enter note title" />
-
-      <textarea
-        className={styles.content}
-        placeholder="Enter note content"
-        maxlength="100"
-      ></textarea>
+      <ul className={styles.noteLabels}>
+        <li>
+          <input
+            type="text"
+            placeholder="Enter note title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </li>
+        <li>
+          <textarea
+            className={styles.content}
+            placeholder="Enter note content"
+            maxLength="100"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
+        </li>
+      </ul>
     </Form>
   );
 };
