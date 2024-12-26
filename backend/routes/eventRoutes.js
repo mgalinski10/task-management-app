@@ -7,11 +7,12 @@ const {
   updateEvent,
   deleteEvent,
 } = require("../controller/eventController");
+const authenticate = require("../middleware/authMiddleware");
 
-router.post("/events", createEvent);
-router.get("/events", getAllEvents);
-router.get("/events/:id", getEventById);
-router.put("/events/:id", updateEvent);
-router.delete("/events/:id", deleteEvent);
+router.post("/events", authenticate, createEvent);
+router.get("/events", authenticate, getAllEvents);
+router.get("/events/:id", authenticate, getEventById);
+router.put("/events/:id", authenticate, updateEvent);
+router.delete("/events/:id", authenticate, deleteEvent);
 
 module.exports = router;

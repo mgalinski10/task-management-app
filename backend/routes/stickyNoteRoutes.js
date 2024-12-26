@@ -7,11 +7,12 @@ const {
   updateStickyNote,
   deleteStickyNote,
 } = require("../controller/stickyNoteController");
+const authenticate = require("../middleware/authMiddleware");
 
-router.post("/notes", createStickyNote);
-router.get("/notes", getAllStickyNotes);
-router.get("/notes/:id", getStickyNoteById);
-router.put("/notes/:id", updateStickyNote);
-router.delete("/notes/:id", deleteStickyNote);
+router.post("/notes", authenticate, createStickyNote);
+router.get("/notes", authenticate, getAllStickyNotes);
+router.get("/notes/:id", authenticate, getStickyNoteById);
+router.put("/notes/:id", authenticate, updateStickyNote);
+router.delete("/notes/:id", authenticate, deleteStickyNote);
 
 module.exports = router;

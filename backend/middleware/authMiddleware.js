@@ -1,5 +1,6 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "yourSecretKey";
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const authenticate = (req, res, next) => {
   const token = req.cookies.token;

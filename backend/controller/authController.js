@@ -1,10 +1,10 @@
-const User = require("../models/User");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config(); // Ładowanie zmiennych z .env
 
-const SECRET_KEY = "yourSecretKey"; // W produkcji używaj zmiennych środowiskowych!
+const SECRET_KEY = process.env.SECRET_KEY;
 
-// Rejestracja użytkownika
 const register = async (req, res) => {
   const { email, password, name } = req.body;
 
@@ -29,10 +29,9 @@ const register = async (req, res) => {
   }
 };
 
-// Logowanie użytkownika
 const login = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body);
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -50,7 +49,7 @@ const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // Włącz w produkcji (HTTPS)
+      secure: true,
       sameSite: "Strict",
     });
 
