@@ -7,7 +7,7 @@ import {
   faNoteSticky,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TaskMenuItem = ({ title, to, icon }) => {
+const MenuItem = ({ title, to, icon }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
 
@@ -23,21 +23,17 @@ const TaskMenuItem = ({ title, to, icon }) => {
   );
 };
 
-const TaskMenu = () => {
+const MenuNavigation = () => {
   return (
     <div className={styles.taskMenuList}>
       <h1 className={styles.title}>Tasks</h1>
       <ul className={styles.listWrapper}>
-        <TaskMenuItem title="Today" to="/" icon={faListCheck} />
-        <TaskMenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
-        <TaskMenuItem
-          title="Sticky Wall"
-          to="/stickywall"
-          icon={faNoteSticky}
-        />
+        <MenuItem title="Today" to="/today" icon={faListCheck} />
+        <MenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
+        <MenuItem title="Sticky Wall" to="/stickywall" icon={faNoteSticky} />
       </ul>
     </div>
   );
 };
 
-export default TaskMenu;
+export default MenuNavigation;
