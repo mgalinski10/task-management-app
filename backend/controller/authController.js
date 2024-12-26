@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config(); // Ładowanie zmiennych z .env
+require("dotenv").config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
