@@ -20,10 +20,10 @@ input {
 .eventLabels {
   list-style: none;
 
-  .eventLabel {
+  li {
     display: flex;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 
     p {
       width: 20%;

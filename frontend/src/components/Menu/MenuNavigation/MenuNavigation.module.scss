@@ -1,25 +1,25 @@
 @import "../../../styles/variables";
 
-.taskMenuList {
-  .title {
+.container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .subTitle {
     font-size: 0.8em;
     font-weight: 500;
-
     margin-bottom: 1em;
-
     text-transform: uppercase;
   }
 
-  .listWrapper {
+  .tasks {
     border-bottom: 1px solid rgb(220, 217, 217);
-
     padding: 0.5em;
-
     list-style: none;
   }
 }
 
-.taskMenuItem {
+.itemContainer {
   a {
     text-decoration: none;
     color: inherit;
@@ -30,7 +30,7 @@
   }
   margin-bottom: 1em;
 
-  .itemWrapper {
+  .content {
     width: 60%;
 
     display: flex;
@@ -43,17 +43,16 @@
     }
   }
 
-  &:hover {
-    cursor: pointer;
-    background-color: $menu-item-hover;
-    transition: ease 0.15s;
-    border-radius: 1cap;
-  }
-
+  &:hover,
   &.active {
     cursor: pointer;
     background-color: $menu-item-hover;
     transition: ease 0.15s;
     border-radius: 1cap;
   }
+}
+
+.userActions {
+  padding: 0.5em;
+  list-style: none;
 }

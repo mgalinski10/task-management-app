@@ -1,15 +1,12 @@
 @import "../../styles/variables";
 
-nav {
+.container {
   background-color: $background-color;
 
-  height: 95vh;
-  min-width: 20vw;
+  height: 100%;
 
   border-radius: 2cap;
   padding: 1em;
-
-  margin-right: 2em;
 
   .title {
     text-align: center;

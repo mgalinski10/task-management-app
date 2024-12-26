@@ -12,8 +12,10 @@ body {
   color: rgb(73, 73, 73);
 }
 
-.container {
+.appContainer {
   width: 100vw;
-  display: flex;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 300px 1fr;
   padding: 1em;
 }

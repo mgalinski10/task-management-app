@@ -3,10 +3,10 @@ import MenuNavigation from "./MenuNavigation/MenuNavigation";
 
 const Menu = () => {
   return (
-    <nav>
+    <div className={styles.container}>
       <h1 className={styles.title}>Menu</h1>
       <MenuNavigation />
-    </nav>
+    </div>
   );
 };
 

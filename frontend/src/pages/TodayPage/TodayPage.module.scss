@@ -1,13 +1,6 @@
-.container {
+.TodayContainer {
   width: 100%;
 
   display: flex;
-  justify-content: space-between;
-
-  section {
-    h1 {
-      margin-bottom: 1em;
-      font-size: 2em;
-    }
-  }
+  justify-content: space-around;
 }
