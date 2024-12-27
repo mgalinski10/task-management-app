@@ -53,7 +53,15 @@ const login = async (req, res) => {
       sameSite: "Strict",
     });
 
-    res.status(200).json({ message: "Logged in successfully" });
+    res.status(200).json({
+      message: "Logged in successfully",
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+      },
+      token,
+    });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }

@@ -19,3 +19,11 @@ body {
   grid-template-columns: 300px 1fr;
   padding: 1em;
 }
+
+.loginContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
