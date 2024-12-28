@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-// Funkcja do połączenia z MongoDB
 const connectDB = async () => {
   try {
-    const mongoURI =
-      "mongodb+srv://michalg359:admin@todoapp.tvkpn.mongodb.net/?retryWrites=true&w=majority&appName=TodoApp";
+    const mongoURI = process.env.MONGO_URI;
 
-    // Łączenie z bazą danych MongoDB
     await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

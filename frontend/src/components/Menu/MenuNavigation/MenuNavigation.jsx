@@ -5,16 +5,18 @@ import {
   faListCheck,
   faCalendarDays,
   faNoteSticky,
+  faRightFromBracket,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TaskMenuItem = ({ title, to, icon }) => {
+const MenuItem = ({ title, to, icon }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
 
   return (
-    <li className={`${styles.taskMenuItem} ${isActive ? styles.active : ""}`}>
+    <li className={`${styles.itemContainer} ${isActive ? styles.active : ""}`}>
       <Link to={to}>
-        <div className={styles.itemWrapper}>
+        <div className={styles.content}>
           <FontAwesomeIcon icon={icon} className={styles.icon} />
           {title}
         </div>
@@ -23,21 +25,25 @@ const TaskMenuItem = ({ title, to, icon }) => {
   );
 };
 
-const TaskMenu = () => {
+const MenuNavigation = () => {
   return (
-    <div className={styles.taskMenuList}>
-      <h1 className={styles.title}>Tasks</h1>
-      <ul className={styles.listWrapper}>
-        <TaskMenuItem title="Today" to="/" icon={faListCheck} />
-        <TaskMenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
-        <TaskMenuItem
-          title="Sticky Wall"
-          to="/stickywall"
-          icon={faNoteSticky}
-        />
-      </ul>
+    <div className={styles.container}>
+      <div>
+        <h1 className={styles.subTitle}>Tasks</h1>
+        <ul className={styles.tasks}>
+          <MenuItem title="Today" to="/" icon={faListCheck} />
+          <MenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
+          <MenuItem title="Sticky Wall" to="/stickywall" icon={faNoteSticky} />
+        </ul>
+      </div>
+      <div>
+        <ul className={styles.userActions}>
+          <MenuItem title="Profile" icon={faUser} />
+          <MenuItem title="Log out" icon={faRightFromBracket} />
+        </ul>
+      </div>
     </div>
   );
 };
 
-export default TaskMenu;
+export default MenuNavigation;

@@ -6,6 +6,7 @@ const Form = ({
   children,
   title,
   isEdit,
+  isHeader = true,
   actionBtnTitle,
   deleteBtnTitle,
   onDelete,
@@ -14,7 +15,7 @@ const Form = ({
 }) => {
   return (
     <form className={styles.container} onSubmit={onSubmit}>
-      <Header title={title} onCloseForm={onCloseForm} />
+      {isHeader && <Header title={title} onCloseForm={onCloseForm} />}
       {children}
       <FormControl
         isEdit={isEdit}

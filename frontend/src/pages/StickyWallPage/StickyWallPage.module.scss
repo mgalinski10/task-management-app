@@ -1,9 +1,12 @@
 .container {
-  flex: 1;
+  width: 95%;
+  margin-left: 5%;
+
   .stickyWall {
     display: grid;
     grid-template-columns: repeat(3, 400px);
     grid-template-rows: repeat(2, 350px);
+    width: 90%;
     gap: 5em;
   }
 }

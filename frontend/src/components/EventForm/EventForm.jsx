@@ -75,7 +75,6 @@ const EventForm = ({ initialData = {} }) => {
     >
       <ul className={styles.eventLabels}>
         <li>
-          <p>Name</p>
           <input
             type="text"
             placeholder="Type Event Name"
@@ -84,7 +83,6 @@ const EventForm = ({ initialData = {} }) => {
           />
         </li>
         <li>
-          <p>Location</p>
           <input
             type="text"
             placeholder="Type Event Location"
@@ -93,7 +91,6 @@ const EventForm = ({ initialData = {} }) => {
           />
         </li>
         <li>
-          <p>Start</p>
           <input
             className={styles.dateInput}
             type="date"
@@ -102,7 +99,6 @@ const EventForm = ({ initialData = {} }) => {
           />
         </li>
         <li>
-          <p>End</p>
           <input
             className={styles.dateInput}
             type="date"

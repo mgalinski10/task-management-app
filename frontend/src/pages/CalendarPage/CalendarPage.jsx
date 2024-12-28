@@ -9,13 +9,13 @@ const CalendarPage = () => {
 
   return (
     <div className="calendar-container">
-      <section>
-        <h1>
-          Calendar
+      <div class="content">
+        <div class="header">
+          <h1>Calendar</h1>
           <button className="add-event-btn" onClick={openForm}>
             Add Event
           </button>
-        </h1>
+        </div>
 
         {loadingEvents && <p>Loading events...</p>}
         {!isOpen && !loadingEvents && (
@@ -25,7 +25,7 @@ const CalendarPage = () => {
         {isOpen && activeEvent && (
           <EventForm key={activeEvent._id} initialData={activeEvent} />
         )}
-      </section>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Today = () => {
   const { isOpen, activeTask } = useToday();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.TodayContainer}>
       <section>
         <PageTitle title="Today" />
         <TaskList />
