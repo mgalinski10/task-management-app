@@ -25,7 +25,9 @@ const TaskForm = ({ initialData = {} }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${initialData._id}`);
+      await axios.delete(`http://localhost:5000/api/tasks/${initialData._id}`, {
+        withCredentials: true,
+      });
       await fetchTasks();
       resetForm();
       closeForm();
@@ -47,15 +49,21 @@ const TaskForm = ({ initialData = {} }) => {
 
     try {
       if (!initialData._id) {
-        await axios.post("http://localhost:5000/api/tasks", task);
+        await axios.post("http://localhost:5000/api/tasks", task, {
+          withCredentials: true,
+        });
         resetForm();
       } else {
         await axios.put(
           `http://localhost:5000/api/tasks/${initialData._id}`,
-          task
+          task,
+          {
+            withCredentials: true,
+          }
         );
       }
       fetchTasks();
+      closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
     }

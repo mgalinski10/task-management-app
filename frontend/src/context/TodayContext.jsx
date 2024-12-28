@@ -8,7 +8,7 @@ export const TodayPageProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeTask, setActiveTask] = useState(null);
-  const { user } = useUser();
+  const { user, token } = useUser();
 
   const fetchTasks = async () => {
     if (!user) return;
@@ -16,6 +16,9 @@ export const TodayPageProvider = ({ children }) => {
     try {
       const response = await axios.get("http://localhost:5000/api/tasks", {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const userTasks = response.data.filter((task) => task.userId === user.id);

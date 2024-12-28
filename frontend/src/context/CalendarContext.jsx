@@ -17,11 +17,14 @@ export const CalendarPageProvider = ({ children }) => {
       const response = await axios.get("http://localhost:5000/api/events", {
         withCredentials: true,
       });
-      const userEvents = response.data.filter(
+
+      const userEvents = await response.data.filter(
         (event) => event.userId === user.id
       );
+      console.log(userEvents);
 
       setEvents(userEvents);
+      console.log(events);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     } finally {
@@ -31,7 +34,7 @@ export const CalendarPageProvider = ({ children }) => {
 
   useEffect(() => {
     fetchEvents();
-  });
+  }, []);
 
   const openEditForm = (event) => {
     setActiveEvent(event);

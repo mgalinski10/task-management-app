@@ -9,7 +9,12 @@ const cookieParser = require("cookie-parser");
 
 const PORT = 5000;
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 connectDB();
 
