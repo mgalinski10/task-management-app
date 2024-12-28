@@ -31,7 +31,7 @@ const MenuNavigation = () => {
       <div>
         <h1 className={styles.subTitle}>Tasks</h1>
         <ul className={styles.tasks}>
-          <MenuItem title="Today" to="/today" icon={faListCheck} />
+          <MenuItem title="Today" to="/" icon={faListCheck} />
           <MenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
           <MenuItem title="Sticky Wall" to="/stickywall" icon={faNoteSticky} />
         </ul>
