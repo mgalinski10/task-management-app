@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const AddNewTaskButton = () => {
   const { openForm } = useToday();
   return (
-    <button className={styles.buttonWrapper} role="button" onClick={openForm}>
+    <button className={styles.buttonWrapper} onClick={openForm}>
       <FontAwesomeIcon icon={faPlus} className={styles.icon} />
       <p>Add New Task</p>
     </button>

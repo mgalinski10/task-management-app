@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "./UserContext";
 
 const StickyWallContext = createContext();
 
@@ -7,11 +8,16 @@ export const StickyWallPageProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeNote, setActiveNote] = useState(null);
   const [notes, setNotes] = useState([]);
+  const { user } = useUser();
 
   const fetchNotes = async () => {
+    if (!user) return;
     try {
-      const response = await axios.get("http://localhost:5000/api/notes");
-      setNotes(response.data);
+      const response = await axios.get("http://localhost:5000/api/notes", {
+        withCredentials: true,
+      });
+      const userNotes = response.data.filter((note) => note.userId === user.id);
+      setNotes(userNotes);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }

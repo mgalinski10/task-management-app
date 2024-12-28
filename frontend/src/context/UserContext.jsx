@@ -11,10 +11,14 @@ export const UserProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${API_URL}/login`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
       const { user, token } = response.data;
 
@@ -37,7 +41,7 @@ export const UserProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    setToken(null);
+    // setToken(null);
     localStorage.removeItem("accessToken");
   };
 

@@ -2,13 +2,13 @@ import styles from "./TaskForm.module.scss";
 import axios from "axios";
 import { useState } from "react";
 import { useToday } from "../../context/TodayContext";
-
+import { useUser } from "../../context/UserContext";
 import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 import Form from "../Form/Form";
 
 const TaskForm = ({ initialData = {} }) => {
   const { fetchTasks, closeForm } = useToday();
-
+  const { user } = useUser(); // Pobranie danych użytkownika z kontekstu
   const [taskName, setTaskName] = useState(initialData.name || "");
   const [description, setDescription] = useState(initialData.description || "");
   const [priority, setPriority] = useState(initialData.priority || "medium");
@@ -25,7 +25,9 @@ const TaskForm = ({ initialData = {} }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${initialData._id}`);
+      await axios.delete(`http://localhost:5000/api/tasks/${initialData._id}`, {
+        withCredentials: true,
+      });
       await fetchTasks();
       resetForm();
       closeForm();
@@ -42,19 +44,26 @@ const TaskForm = ({ initialData = {} }) => {
       description,
       priority,
       date,
+      userId: user.id,
     };
 
     try {
       if (!initialData._id) {
-        await axios.post("http://localhost:5000/api/tasks", task);
+        await axios.post("http://localhost:5000/api/tasks", task, {
+          withCredentials: true,
+        });
         resetForm();
       } else {
         await axios.put(
           `http://localhost:5000/api/tasks/${initialData._id}`,
-          task
+          task,
+          {
+            withCredentials: true,
+          }
         );
       }
       fetchTasks();
+      closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
     }

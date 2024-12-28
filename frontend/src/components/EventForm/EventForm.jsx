@@ -2,10 +2,12 @@ import styles from "./EventForm.module.scss";
 import axios from "axios";
 import { useState } from "react";
 import { useCalendar } from "../../context/CalendarContext";
+import { useUser } from "../../context/UserContext";
 import Form from "../Form/Form";
 
 const EventForm = ({ initialData = {} }) => {
   const { closeForm, fetchEvents } = useCalendar();
+  const { user } = useUser();
   const [title, setTitle] = useState(initialData.title || "");
   const [location, setLocation] = useState(initialData.location || "");
   const [start, setStart] = useState(initialData.start || "");
@@ -22,7 +24,9 @@ const EventForm = ({ initialData = {} }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${initialData.id}`);
+      await axios.delete(`http://localhost:5000/api/events/${initialData.id}`, {
+        withCredentials: true,
+      });
       await fetchEvents();
       resetForm();
       closeForm();
@@ -39,17 +43,23 @@ const EventForm = ({ initialData = {} }) => {
       location,
       start,
       end,
+      userId: user.id,
     };
 
     try {
       if (!initialData.id) {
-        await axios.post("http://localhost:5000/api/events", event);
+        await axios.post("http://localhost:5000/api/events", event, {
+          withCredentials: true,
+        });
 
         resetForm();
       } else {
         await axios.put(
           `http://localhost:5000/api/events/${initialData.id}`,
-          event
+          event,
+          {
+            withCredentials: true,
+          }
         );
       }
       await fetchEvents();

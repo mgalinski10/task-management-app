@@ -9,11 +9,11 @@ import { useCalendar } from "../../context/CalendarContext";
 const eventsService = createEventsServicePlugin();
 
 const Calendar = ({ events }) => {
-  const { openEditForm } = useCalendar();
+  const { openEditForm, eventsss } = useCalendar();
 
   const config = {
     views: [viewMonthGrid],
-    events,
+    eventsss,
     callbacks: {
       onDoubleClickEvent(event) {
         console.log(event);
