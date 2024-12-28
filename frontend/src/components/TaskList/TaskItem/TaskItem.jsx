@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
 import styles from "./TaskItem.module.scss";
-import { useToday } from "../../../context/TodayContext";
+import { useTask } from "../../../context/TaskContext";
 
 const TaskItem = ({ taskObj, color }) => {
-  const { openEditForm } = useToday();
+  const { openEditForm } = useTask();
 
   return (
     <li

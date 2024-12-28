@@ -1,14 +1,14 @@
 import styles from "./TaskForm.module.scss";
 import axios from "axios";
 import { useState } from "react";
-import { useToday } from "../../context/TodayContext";
+import { useTask } from "../../context/TaskContext";
 import { useUser } from "../../context/UserContext";
 import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 import Form from "../Form/Form";
 
 const TaskForm = ({ initialData = {} }) => {
-  const { fetchTasks, closeForm } = useToday();
-  const { user } = useUser(); // Pobranie danych użytkownika z kontekstu
+  const { closeForm } = useTask();
+  const { user } = useUser();
   const [taskName, setTaskName] = useState(initialData.name || "");
   const [description, setDescription] = useState(initialData.description || "");
   const [priority, setPriority] = useState(initialData.priority || "medium");
@@ -28,7 +28,7 @@ const TaskForm = ({ initialData = {} }) => {
       await axios.delete(`http://localhost:5000/api/tasks/${initialData._id}`, {
         withCredentials: true,
       });
-      await fetchTasks();
+
       resetForm();
       closeForm();
     } catch (error) {
@@ -62,7 +62,7 @@ const TaskForm = ({ initialData = {} }) => {
           }
         );
       }
-      fetchTasks();
+
       closeForm();
     } catch (error) {
       console.error("Error creating task:", error);

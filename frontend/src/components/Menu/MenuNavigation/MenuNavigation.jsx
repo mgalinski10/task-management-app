@@ -3,7 +3,6 @@ import styles from "./MenuNavigation.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListCheck,
-  faCalendarDays,
   faNoteSticky,
   faRightFromBracket,
   faUser,
@@ -31,8 +30,7 @@ const MenuNavigation = () => {
       <div>
         <h1 className={styles.subTitle}>Tasks</h1>
         <ul className={styles.tasks}>
-          <MenuItem title="Today" to="/" icon={faListCheck} />
-          <MenuItem title="Calendar" to="/calendar" icon={faCalendarDays} />
+          <MenuItem title="Tasks" to="/" icon={faListCheck} />
           <MenuItem title="Sticky Wall" to="/stickywall" icon={faNoteSticky} />
         </ul>
       </div>

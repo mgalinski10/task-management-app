@@ -25,7 +25,7 @@ export const UserProvider = ({ children }) => {
       setUser(user);
       setToken(token);
 
-      localStorage.setItem("accessToken", token);
+      localStorage.setItem("token", token);
     } catch (err) {
       console.log(err);
     }
@@ -39,12 +39,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    // setToken(null);
-    localStorage.removeItem("accessToken");
-  };
-
   return (
     <UserContext.Provider
       value={{
@@ -52,7 +46,6 @@ export const UserProvider = ({ children }) => {
         token,
         login,
         register,
-        logout,
       }}
     >
       {children}
