@@ -2,13 +2,13 @@ import styles from "./TaskForm.module.scss";
 import axios from "axios";
 import { useState } from "react";
 import { useToday } from "../../context/TodayContext";
-
+import { useUser } from "../../context/UserContext";
 import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 import Form from "../Form/Form";
 
 const TaskForm = ({ initialData = {} }) => {
   const { fetchTasks, closeForm } = useToday();
-
+  const { user } = useUser(); // Pobranie danych użytkownika z kontekstu
   const [taskName, setTaskName] = useState(initialData.name || "");
   const [description, setDescription] = useState(initialData.description || "");
   const [priority, setPriority] = useState(initialData.priority || "medium");
@@ -42,6 +42,7 @@ const TaskForm = ({ initialData = {} }) => {
       description,
       priority,
       date,
+      userId: user.id,
     };
 
     try {

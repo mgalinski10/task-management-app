@@ -5,6 +5,7 @@ const taskRoutes = require("./routes/taskRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const stickyNoteRoutes = require("./routes/stickyNoteRoutes");
 const authRoutes = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
 
 const PORT = 5000;
 const app = express();
@@ -13,7 +14,7 @@ app.use(cors());
 connectDB();
 
 app.use(express.json());
-
+app.use(cookieParser());
 app.use("/api", taskRoutes);
 app.use("/api", eventRoutes);
 app.use("/api", stickyNoteRoutes);

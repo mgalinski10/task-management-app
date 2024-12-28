@@ -11,6 +11,7 @@ const stickyNoteSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 const StickyNote = mongoose.model("StickyNote", stickyNoteSchema);
