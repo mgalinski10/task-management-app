@@ -1,16 +1,16 @@
-import styles from "./TodayPage.module.scss";
+import styles from "./TaskPage.module.scss";
 import TaskList from "../../components/TaskList/TaskList";
 import TaskForm from "../../components/TaskForm/TaskForm";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { useToday } from "../../context/TodayContext";
+import { useTask } from "../../context/TaskContext";
 
-const Today = () => {
-  const { isOpen, activeTask } = useToday();
+const TaskPage = () => {
+  const { isOpen, activeTask } = useTask();
 
   return (
     <div className={styles.TodayContainer}>
       <section>
-        <PageTitle title="Today" />
+        <PageTitle title="Tasks" />
         <TaskList />
       </section>
       <aside>
@@ -23,4 +23,4 @@ const Today = () => {
   );
 };
 
-export default Today;
+export default TaskPage;

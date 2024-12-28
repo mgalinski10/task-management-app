@@ -25,8 +25,8 @@ const LoginForm = () => {
   return (
     <Form isHeader={false} actionBtnTitle={"Log in"} onSubmit={handleSubmit}>
       <h1 className={styles.title}>LOGIN</h1>
-      <ul className={styles.labels}>
-        <li>
+      <ul className={styles.loginInputs}>
+        <li className={styles.input}>
           <input
             type="email"
             placeholder="E-mail"
@@ -34,7 +34,7 @@ const LoginForm = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </li>
-        <li>
+        <li className={styles.input}>
           <input
             type="password"
             placeholder="Password"

@@ -1,25 +1,24 @@
 import styles from "./TaskList.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
 import TaskItem from "./TaskItem/TaskItem";
-import { useToday } from "../../context/TodayContext";
-import { useEffect } from "react";
-
-const AddNewTaskButton = () => {
-  const { openForm } = useToday();
-  return (
-    <button className={styles.buttonWrapper} onClick={openForm}>
-      <FontAwesomeIcon icon={faPlus} className={styles.icon} />
-      <p>Add New Task</p>
-    </button>
-  );
-};
+import AddNewTaskButton from "./AddNewTaskButton/AddNewTaskButton";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const TaskList = () => {
-  const { tasks, fetchTasks } = useToday();
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/tasks", {
+          withCredentials: true,
+        });
+        setTasks(response.data);
+      } catch (err) {
+        console.log(`Error while fetching tasks: ${err}`);
+      }
+    };
+
     fetchTasks();
   }, []);
 

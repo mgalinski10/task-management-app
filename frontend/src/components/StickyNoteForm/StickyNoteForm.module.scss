@@ -1,5 +1,21 @@
 .noteLabels {
   list-style: none;
+
+  input {
+    font-family: inherit;
+    width: 400px;
+    background-color: inherit;
+    font-size: 1.1em;
+    padding: 0.3em;
+
+    border-radius: 0.5cap;
+    border: 1px solid rgb(220, 217, 217);
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgb(220, 217, 217);
+    }
+  }
   .content {
     background-color: inherit;
     width: 400px;

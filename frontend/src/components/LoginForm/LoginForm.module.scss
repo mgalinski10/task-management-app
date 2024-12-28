@@ -2,14 +2,27 @@
   text-align: center;
 }
 
-.labels {
+.loginInputs {
   list-style: none;
 
-  li {
-    input {
-      margin-top: 1em;
-    }
+  input {
+    font-family: inherit;
+
+    background-color: inherit;
+    width: 100%;
+
+    font-size: 1.1em;
+    padding: 0.3em;
+
+    border-radius: 0.5cap;
+    border: 1px solid rgb(220, 217, 217);
+
     margin-bottom: 2em;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgb(220, 217, 217);
+    }
   }
 }
 

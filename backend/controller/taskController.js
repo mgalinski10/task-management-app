@@ -3,7 +3,7 @@ const Task = require("../models/taskModel");
 const createTask = async (req, res) => {
   try {
     const { name, description, priority, date } = req.body;
-    const userId = req.userId;
+    const { userId } = req;
 
     const task = new Task({
       name,
@@ -14,7 +14,6 @@ const createTask = async (req, res) => {
     });
 
     await task.save();
-    console.log(`Created task: ${task}`);
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ message: "Error creating task", error });
@@ -23,10 +22,9 @@ const createTask = async (req, res) => {
 
 const getAllTasks = async (req, res) => {
   try {
-    const userId = req.userId; // Zakładając, że `userId` pochodzi z tokenu JWT
-    const tasks = await Task.find({ userId }); // Filtrowanie zadań po userId
+    const { userId } = req;
+    const tasks = await Task.find({ userId });
 
-    console.log(`Available tasks: ${tasks}`);
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: "Error fetching tasks", error });
@@ -35,14 +33,13 @@ const getAllTasks = async (req, res) => {
 
 const getTaskById = async (req, res) => {
   try {
-    const userId = req.userId; // Zakładając, że `userId` pochodzi z tokenu JWT
-    const task = await Task.findOne({ _id: req.params.id, userId }); // Sprawdzanie zarówno ID zadania, jak i userId
+    const { userId } = req;
+    const task = await Task.findOne({ _id: req.params.id, userId });
 
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
 
-    console.log(`Found task: ${task}`);
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ message: "Error fetching task", error });
@@ -51,9 +48,9 @@ const getTaskById = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    const userId = req.userId; // Zakładając, że `userId` pochodzi z tokenu JWT
+    const { userId } = req;
     const task = await Task.findOneAndUpdate(
-      { _id: req.params.id, userId }, // Sprawdzanie userId podczas aktualizacji
+      { _id: req.params.id, userId },
       req.body,
       { new: true }
     );
@@ -72,8 +69,8 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const userId = req.userId; // Zakładając, że `userId` pochodzi z tokenu JWT
-    const task = await Task.findOneAndDelete({ _id: req.params.id, userId }); // Sprawdzanie userId przy usuwaniu
+    const { userId } = req;
+    const task = await Task.findOneAndDelete({ _id: req.params.id, userId });
 
     if (!task) {
       return res
