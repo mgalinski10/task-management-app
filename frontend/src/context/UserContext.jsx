@@ -44,6 +44,15 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+      setUser(null);
+    } catch (err) {
+      console.error("Error during logout", err);
+    }
+  };
+
   const register = async (userData) => {
     try {
       await axios.post(`${API_URL}/register`, userData);
@@ -56,7 +65,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-
+        logout,
         login,
         register,
       }}

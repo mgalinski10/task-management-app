@@ -67,6 +67,16 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "Strict",
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+};
+
+module.exports = logout;
+
 const checkAuth = async (req, res) => {
   try {
     const token = req.cookies.token;
@@ -92,4 +102,4 @@ const checkAuth = async (req, res) => {
 
 module.exports = checkAuth;
 
-module.exports = { register, login, checkAuth };
+module.exports = { register, login, logout, checkAuth };
