@@ -1,13 +1,29 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
 
   const API_URL = "http://localhost:5000/auth";
+
+  const checkAuth = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/check-auth`, {
+        withCredentials: true,
+      });
+
+      setUser(response.data.user);
+    } catch (err) {
+      console.log("User not authenticated");
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const login = async (email, password) => {
     try {
@@ -20,12 +36,9 @@ export const UserProvider = ({ children }) => {
         { withCredentials: true }
       );
 
-      const { user, token } = response.data;
+      const { user } = response.data;
 
       setUser(user);
-      setToken(token);
-
-      localStorage.setItem("token", token);
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +56,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        token,
+
         login,
         register,
       }}
