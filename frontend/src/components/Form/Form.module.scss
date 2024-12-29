@@ -27,4 +27,8 @@
 
   margin-right: auto;
   margin-left: auto;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

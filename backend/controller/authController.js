@@ -7,9 +7,11 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
+  console.log(req.body);
 
   try {
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
       return res.status(400).json({ error: "Email already in use" });
     }
