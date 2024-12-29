@@ -3,10 +3,12 @@ const StickyNote = require("../models/stickyNoteModel");
 const createStickyNote = async (req, res) => {
   try {
     const { title, content } = req.body;
+    const { userId } = req;
 
     const stickyNote = new StickyNote({
       title,
       content,
+      userId,
     });
 
     await stickyNote.save();
@@ -19,8 +21,9 @@ const createStickyNote = async (req, res) => {
 
 const getAllStickyNotes = async (req, res) => {
   try {
-    const stickyNotes = await StickyNote.find();
-    console.log(`Available sticky notes: ${stickyNotes}`);
+    const { userId } = req;
+    const stickyNotes = await StickyNote.find({ userId });
+
     res.status(200).json(stickyNotes);
   } catch (error) {
     res.status(500).json({ message: "Error fetching sticky notes", error });
@@ -29,11 +32,13 @@ const getAllStickyNotes = async (req, res) => {
 
 const getStickyNoteById = async (req, res) => {
   try {
-    const stickyNote = await StickyNote.findById(req.params.id);
+    const { userId } = req;
+    const stickyNote = await StickyNote.findById(req.params.id, userId);
+
     if (!stickyNote) {
       return res.status(404).json({ message: "Sticky note not found" });
     }
-    console.log(`Found sticky note: ${stickyNote}`);
+
     res.status(200).json(stickyNote);
   } catch (error) {
     res.status(500).json({ message: "Error fetching sticky note", error });
@@ -42,16 +47,19 @@ const getStickyNoteById = async (req, res) => {
 
 const updateStickyNote = async (req, res) => {
   try {
+    const { userId } = req;
     const stickyNote = await StickyNote.findByIdAndUpdate(
-      req.params.id,
+      { _id: req.params.id, userId },
       req.body,
       {
         new: true,
       }
     );
+
     if (!stickyNote) {
       return res.status(404).json({ message: "Sticky note not found" });
     }
+
     res.status(200).json(stickyNote);
   } catch (error) {
     res.status(500).json({ message: "Error updating sticky note", error });
@@ -60,10 +68,16 @@ const updateStickyNote = async (req, res) => {
 
 const deleteStickyNote = async (req, res) => {
   try {
-    const stickyNote = await StickyNote.findByIdAndDelete(req.params.id);
+    const { userId } = req;
+    const stickyNote = await StickyNote.findByIdAndDelete(
+      req.params.id,
+      userId
+    );
+
     if (!stickyNote) {
       return res.status(404).json({ message: "Sticky note not found" });
     }
+
     res.status(200).json({ message: "Sticky note deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting sticky note", error });
