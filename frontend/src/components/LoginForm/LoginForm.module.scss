@@ -28,4 +28,13 @@
 
 .information {
   text-align: center;
+  cursor: pointer;
+
+  span {
+    font-weight: bolder;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

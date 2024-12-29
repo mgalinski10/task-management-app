@@ -7,9 +7,11 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
+  console.log(req.body);
 
   try {
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
       return res.status(400).json({ error: "Email already in use" });
     }
@@ -31,7 +33,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -67,4 +69,39 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const logout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "Strict",
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+};
+
+module.exports = logout;
+
+const checkAuth = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    const decoded = jwt.verify(token, SECRET_KEY);
+
+    const user = await User.findById(decoded.userId);
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(401).json({ error: "Invalid or expired token" });
+  }
+};
+
+module.exports = checkAuth;
+
+module.exports = { register, login, logout, checkAuth };

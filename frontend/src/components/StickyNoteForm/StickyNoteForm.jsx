@@ -3,10 +3,11 @@ import styles from "./StickyNoteForm.module.scss";
 import axios from "axios";
 import Form from "../Form/Form";
 import { useStickyWall } from "../../context/StickyWallContext";
+import { useUser } from "../../context/UserContext";
 
 const StickyNoteForm = ({ initialData = {} }) => {
-  const { closeForm, fetchNotes } = useStickyWall();
-
+  const { closeForm } = useStickyWall();
+  const { user } = useUser();
   const [title, setTitle] = useState(initialData.title || "");
   const [content, setContent] = useState(initialData.content || "");
 
@@ -21,9 +22,12 @@ const StickyNoteForm = ({ initialData = {} }) => {
     try {
       if (isEdit) {
         await axios.delete(
-          `http://localhost:5000/api/notes/${initialData._id}`
+          `http://localhost:5000/api/notes/${initialData._id}`,
+          {
+            withCredentials: true,
+          }
         );
-        await fetchNotes();
+
         resetForm();
         closeForm();
       }
@@ -38,19 +42,24 @@ const StickyNoteForm = ({ initialData = {} }) => {
     const note = {
       title,
       content,
+      userId: user.id,
     };
 
     try {
       if (!isEdit) {
-        await axios.post("http://localhost:5000/api/notes", note);
+        await axios.post("http://localhost:5000/api/notes", note, {
+          withCredentials: true,
+        });
       } else {
         await axios.put(
           `http://localhost:5000/api/notes/${initialData._id}`,
-          note
+          note,
+          {
+            withCredentials: true,
+          }
         );
       }
 
-      await fetchNotes();
       resetForm();
       closeForm();
     } catch (error) {

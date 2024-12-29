@@ -7,6 +7,7 @@ import {
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "../../../context/UserContext";
 
 const MenuItem = ({ title, to, icon }) => {
   const location = useLocation();
@@ -24,6 +25,22 @@ const MenuItem = ({ title, to, icon }) => {
   );
 };
 
+const LogoutButton = ({ title, icon }) => {
+  const { logout } = useUser();
+
+  const handleClick = () => {
+    logout();
+  };
+  return (
+    <li className={styles.itemContainer} onClick={handleClick}>
+      <div className={styles.content}>
+        <FontAwesomeIcon icon={icon} className={styles.icon} />
+        {title}
+      </div>
+    </li>
+  );
+};
+
 const MenuNavigation = () => {
   return (
     <div className={styles.container}>
@@ -37,7 +54,7 @@ const MenuNavigation = () => {
       <div>
         <ul className={styles.userActions}>
           <MenuItem title="Profile" icon={faUser} />
-          <MenuItem title="Log out" icon={faRightFromBracket} />
+          <LogoutButton title="Log out" icon={faRightFromBracket} />
         </ul>
       </div>
     </div>
