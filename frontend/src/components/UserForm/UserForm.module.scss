@@ -11,7 +11,8 @@ form {
       display: flex;
       flex-direction: column;
 
-      input {
+      input,
+      select {
         font-family: inherit;
         background-color: whitesmoke;
         width: 95%;

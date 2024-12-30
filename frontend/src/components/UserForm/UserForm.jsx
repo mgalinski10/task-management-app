@@ -11,15 +11,19 @@ const UserForm = () => {
         </li>
         <li className={styles.item}>
           <label>Gender</label>
-          <input placeholder="Choose your gender" />
-        </li>
-        <li className={styles.item}>
-          <label>City</label>
-          <input placeholder="Chose your City" />
+          <select>
+            <option value="">Select...</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </li>
         <li className={styles.item}>
           <label>Country</label>
-          <input placeholder="Choose yout Country" />
+          <select>
+            <option value="">Select...</option>
+            <option value="gdynia">Poland</option>
+            <option value="gdansk">United States</option>
+          </select>
         </li>
       </ul>
     </form>
