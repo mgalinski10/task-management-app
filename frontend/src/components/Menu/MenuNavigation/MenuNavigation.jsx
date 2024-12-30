@@ -47,7 +47,7 @@ const MenuNavigation = () => {
       <div>
         <h1 className={styles.subTitle}>Tasks</h1>
         <ul className={styles.tasks}>
-          <MenuItem title="Tasks" to="/" icon={faListCheck} />
+          <MenuItem title="Tasks" to="/tasks" icon={faListCheck} />
           <MenuItem title="Sticky Wall" to="/stickywall" icon={faNoteSticky} />
         </ul>
       </div>
