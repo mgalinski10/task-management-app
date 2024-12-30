@@ -69,10 +69,10 @@ const updateStickyNote = async (req, res) => {
 const deleteStickyNote = async (req, res) => {
   try {
     const { userId } = req;
-    const stickyNote = await StickyNote.findByIdAndDelete(
-      req.params.id,
-      userId
-    );
+    const stickyNote = await StickyNote.findByIdAndDelete({
+      _id: req.params.id,
+      userId,
+    });
 
     if (!stickyNote) {
       return res.status(404).json({ message: "Sticky note not found" });
