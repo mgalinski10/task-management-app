@@ -1,0 +1,29 @@
+form {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  .labels {
+    width: 70%;
+    list-style: none;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+
+      input,
+      select {
+        font-family: inherit;
+        background-color: whitesmoke;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+
+        padding: 1em;
+        border-radius: 1cap;
+        margin-top: 1em;
+        margin-bottom: 2em;
+      }
+    }
+  }
+}
