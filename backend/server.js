@@ -18,6 +18,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+//test
 connectDB();
 
 app.use("/api", taskRoutes);
