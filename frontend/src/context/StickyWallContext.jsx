@@ -1,10 +1,23 @@
 import React, { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 const StickyWallContext = createContext();
 
 export const StickyWallPageProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeNote, setActiveNote] = useState(null);
+  const [notes, setNotes] = useState([]);
+
+  const fetchNotes = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/notes", {
+        withCredentials: true,
+      });
+      setNotes(response.data);
+    } catch (err) {
+      console.log(`Error while fetching tasks: ${err}`);
+    }
+  };
 
   const openEditForm = (note) => {
     setActiveNote(note);
@@ -29,6 +42,8 @@ export const StickyWallPageProvider = ({ children }) => {
         isOpen,
         activeNote,
         openEditForm,
+        notes,
+        fetchNotes,
       }}
     >
       {children}

@@ -1,24 +1,13 @@
 import styles from "./TaskList.module.scss";
 import TaskItem from "./TaskItem/TaskItem";
 import AddNewTaskButton from "./AddNewTaskButton/AddNewTaskButton";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useTask } from "../../context/TaskContext";
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, fetchTasks } = useTask();
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/tasks", {
-          withCredentials: true,
-        });
-        setTasks(response.data);
-      } catch (err) {
-        console.log(`Error while fetching tasks: ${err}`);
-      }
-    };
-
     fetchTasks();
   }, []);
 

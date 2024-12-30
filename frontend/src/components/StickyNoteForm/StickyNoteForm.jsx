@@ -6,7 +6,7 @@ import { useStickyWall } from "../../context/StickyWallContext";
 import { useUser } from "../../context/UserContext";
 
 const StickyNoteForm = ({ initialData = {} }) => {
-  const { closeForm } = useStickyWall();
+  const { closeForm, fetchNotes } = useStickyWall();
   const { user } = useUser();
   const [title, setTitle] = useState(initialData.title || "");
   const [content, setContent] = useState(initialData.content || "");
@@ -33,6 +33,8 @@ const StickyNoteForm = ({ initialData = {} }) => {
       }
     } catch (error) {
       console.error("Error deleting note:", error);
+    } finally {
+      fetchNotes();
     }
   };
 
@@ -64,6 +66,8 @@ const StickyNoteForm = ({ initialData = {} }) => {
       closeForm();
     } catch (error) {
       console.error("Error saving note:", error);
+    } finally {
+      fetchNotes();
     }
   };
 

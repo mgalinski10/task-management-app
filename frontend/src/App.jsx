@@ -12,7 +12,7 @@ const MainLayout = () => {
       <Menu />
       <div className={styles.content}>
         <Routes>
-          <Route path="/" element={<TaskPage />} />
+          <Route path="/tasks" element={<TaskPage />} />
           <Route path="/stickywall" element={<StickyWallPage />} />
         </Routes>
       </div>
@@ -30,6 +30,7 @@ const LoginLayout = () => {
 
 const App = () => {
   const { user } = useUser();
+
   return (
     <BrowserRouter>{!user ? <LoginLayout /> : <MainLayout />}</BrowserRouter>
   );
