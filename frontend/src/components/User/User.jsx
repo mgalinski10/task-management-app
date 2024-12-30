@@ -1,9 +1,10 @@
-// rafce
-
 import React from "react";
 import styles from "./User.module.scss";
+import { useUser } from "../../context/UserContext";
 
 const User = () => {
+  const { user } = useUser();
+
   return (
     <div className={styles.user}>
       <div className={styles.picture}>
@@ -11,10 +12,10 @@ const User = () => {
       </div>
       <ul className={styles.information}>
         <li>
-          <h3>Jeff Bezos</h3>
+          <h3>{user.name}</h3>
         </li>
         <li>
-          <p>spaceX@interia.pl</p>
+          <p>{user.email}</p>
         </li>
       </ul>
     </div>
