@@ -53,7 +53,7 @@ const MenuNavigation = () => {
       </div>
       <div>
         <ul className={styles.userActions}>
-          <MenuItem title="Profile" icon={faUser} />
+          <MenuItem title="Profile" to="/profile" icon={faUser} />
           <LogoutButton title="Log out" icon={faRightFromBracket} />
         </ul>
       </div>
