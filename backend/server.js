@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const taskRoutes = require("./routes/taskRoutes");
 const stickyNoteRoutes = require("./routes/stickyNoteRoutes");
 const authRoutes = require("./routes/authRoutes");
+const userDetailsRoutes = require("./routes/userDetailsRoutes");
 const cookieParser = require("cookie-parser");
 
 const PORT = 5000;
@@ -18,12 +19,12 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-//test
 connectDB();
 
 app.use("/api", taskRoutes);
 app.use("/api", stickyNoteRoutes);
 app.use("/auth", authRoutes);
+app.use("/api", userDetailsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
