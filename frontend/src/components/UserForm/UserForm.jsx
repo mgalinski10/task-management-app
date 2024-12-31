@@ -1,14 +1,55 @@
 import React, { useState } from "react";
 import styles from "./UserForm.module.scss";
 import Button from "../Button/Button";
+import { useUser } from "../../context/UserContext";
+import axios from "axios";
+import { useProfile } from "../../context/ProfileContext";
 
-const UserForm = () => {
-  const [nickname, setNickname] = useState("");
-  const [gender, setGender] = useState("");
-  const [country, setCountry] = useState("");
+const UserForm = ({ initialData = {} }) => {
+  const { user } = useUser();
+  const { fetchProfileDetails } = useProfile();
+  const [nickname, setNickname] = useState(initialData.nickname || "");
+  const [gender, setGender] = useState(initialData.gender || "");
+  const [country, setCountry] = useState(initialData.country || "");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const profileDetails = {
+      nickname,
+      gender,
+      country,
+      userId: user.id,
+    };
+
+    try {
+      if (!initialData._id) {
+        await axios.post(
+          "http://localhost:5000/api/user-details",
+          profileDetails,
+          {
+            withCredentials: true,
+          }
+        );
+      } else {
+        await axios.put(
+          `http://localhost:5000/api/user-details`,
+          profileDetails,
+          {
+            withCredentials: true,
+          }
+        );
+      }
+      alert("Data has been saved");
+    } catch (error) {
+      console.error("Error creating user details:", error);
+    } finally {
+      fetchProfileDetails();
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <ul className={styles.labels}>
         <li className={styles.item}>
           <label>Nickname</label>
