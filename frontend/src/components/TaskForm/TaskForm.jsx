@@ -7,7 +7,7 @@ import TaskDetailsForm from "./TaskDetailsForm/TaskDetailsForm";
 import Form from "../Form/Form";
 
 const TaskForm = ({ initialData = {} }) => {
-  const { closeForm, fetchTasks } = useTask();
+  const { closeForm } = useTask();
   const { user } = useUser();
   const [taskName, setTaskName] = useState(initialData.name || "");
   const [description, setDescription] = useState(initialData.description || "");
@@ -33,8 +33,6 @@ const TaskForm = ({ initialData = {} }) => {
       closeForm();
     } catch (error) {
       console.error("Error deleting task:", error);
-    } finally {
-      fetchTasks();
     }
   };
 
@@ -68,8 +66,6 @@ const TaskForm = ({ initialData = {} }) => {
       closeForm();
     } catch (error) {
       console.error("Error creating task:", error);
-    } finally {
-      fetchTasks();
     }
   };
 
