@@ -1,4 +1,5 @@
 const WebSocket = require("ws");
+const Task = require("../models/Task");
 
 let wss;
 
@@ -28,4 +29,12 @@ function broadcast(data) {
   }
 }
 
-module.exports = { setupWebSocket, broadcast };
+function setupChangeStream() {
+  Task.watch().on("change", (change) => {
+    console.log("Zmiana w bazie danych:", change);
+
+    broadcast({ type: "TASK_UPDATED", change });
+  });
+}
+
+module.exports = { setupWebSocket, setupChangeStream, broadcast };
