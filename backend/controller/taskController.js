@@ -16,7 +16,6 @@ const createTask = async (req, res) => {
 
     await task.save();
 
-    broadcast({ type: "TASK_UPDATED", task });
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ message: "Error creating task", error });
@@ -64,7 +63,6 @@ const updateTask = async (req, res) => {
         .json({ message: "Task not found or you are not authorized" });
     }
 
-    broadcast({ type: "TASK_UPDATED", task });
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ message: "Error updating task", error });
@@ -82,7 +80,6 @@ const deleteTask = async (req, res) => {
         .json({ message: "Task not found or you are not authorized" });
     }
 
-    broadcast({ type: "TASK_UPDATED", task });
     res.status(200).json({ message: "Task deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting task", error });

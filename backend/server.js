@@ -7,7 +7,7 @@ const stickyNoteRoutes = require("./routes/stickyNoteRoutes");
 const authRoutes = require("./routes/authRoutes");
 const userDetailsRoutes = require("./routes/userDetailsRoutes");
 const cookieParser = require("cookie-parser");
-const { setupWebSocket } = require("./config/websocket");
+const { setupWebSocket, setupChangeStream } = require("./config/websocket");
 
 const app = express();
 const server = http.createServer(app);
