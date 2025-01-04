@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 
 const TaskContext = createContext();
@@ -18,6 +18,26 @@ export const TaskPageProvider = ({ children }) => {
       console.log(`Error while fetching tasks: ${err}`);
     }
   };
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:5000");
+
+    socket.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === "TASK_UPDATED") {
+        fetchTasks();
+      }
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
   const openForm = () => {
     setIsOpen(true);
