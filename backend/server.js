@@ -1,14 +1,16 @@
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
 const connectDB = require("./config/db");
 const taskRoutes = require("./routes/taskRoutes");
 const stickyNoteRoutes = require("./routes/stickyNoteRoutes");
 const authRoutes = require("./routes/authRoutes");
 const userDetailsRoutes = require("./routes/userDetailsRoutes");
 const cookieParser = require("cookie-parser");
+const { setupWebSocket, setupChangeStream } = require("./config/websocket");
 
-const PORT = 5000;
 const app = express();
+const server = http.createServer(app);
 
 app.use(
   cors({
@@ -26,6 +28,11 @@ app.use("/api", stickyNoteRoutes);
 app.use("/auth", authRoutes);
 app.use("/api", userDetailsRoutes);
 
-app.listen(PORT, () => {
+setupWebSocket(server);
+
+setupChangeStream();
+
+const PORT = 5000;
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
