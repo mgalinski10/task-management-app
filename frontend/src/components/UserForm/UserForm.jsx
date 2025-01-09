@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./UserForm.module.scss";
 import Button from "../Button/Button";
 import { useUser } from "../../context/UserContext";
@@ -11,6 +11,27 @@ const UserForm = ({ initialData = {} }) => {
   const [nickname, setNickname] = useState(initialData.nickname || "");
   const [gender, setGender] = useState(initialData.gender || "");
   const [country, setCountry] = useState(initialData.country || "");
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/user-details`,
+        { withCredentials: true }
+      );
+
+      const details = response.data;
+
+      setNickname(details.nickname || "");
+      setGender(details.gender || "");
+      setCountry(details.country || "");
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
