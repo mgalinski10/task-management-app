@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const StickyWallContext = createContext();
@@ -18,6 +18,26 @@ export const StickyWallPageProvider = ({ children }) => {
       console.log(`Error while fetching tasks: ${err}`);
     }
   };
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:5000");
+
+    socket.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === "NOTE_UPDATED") {
+        fetchNotes();
+      }
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
   const openEditForm = (note) => {
     setActiveNote(note);

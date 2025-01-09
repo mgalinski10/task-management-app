@@ -1,5 +1,6 @@
 const WebSocket = require("ws");
 const Task = require("../models/taskModel");
+const StickyNote = require("../models/stickyNoteModel");
 
 let wss;
 
@@ -34,6 +35,12 @@ function setupChangeStream() {
     console.log("Zmiana w bazie danych:", change);
 
     broadcast({ type: "TASK_UPDATED", change });
+  });
+
+  StickyNote.watch().on("change", (change) => {
+    console.log("Zmiana w bazie danych (StickyNote):", change);
+
+    broadcast({ type: "NOTE_UPDATED", change });
   });
 }
 
