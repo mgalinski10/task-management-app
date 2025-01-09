@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import styles from "./MenuNavigation.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
   faListCheck,
   faNoteSticky,
@@ -27,9 +28,11 @@ const MenuItem = ({ title, to, icon }) => {
 
 const LogoutButton = ({ title, icon }) => {
   const { logout } = useUser();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     logout();
+    navigate("/");
   };
   return (
     <li className={styles.itemContainer} onClick={handleClick}>
