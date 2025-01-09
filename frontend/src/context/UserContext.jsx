@@ -41,6 +41,7 @@ export const UserProvider = ({ children }) => {
       setUser(user);
     } catch (err) {
       console.log(err);
+      alert("Invalid email or password. Try again.");
     }
   };
 
@@ -58,6 +59,7 @@ export const UserProvider = ({ children }) => {
       await axios.post(`${API_URL}/register`, userData);
     } catch (err) {
       console.log(err);
+      alert("Invalid data. Try again");
     }
   };
 

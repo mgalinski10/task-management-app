@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import Form from "../Form/Form";
 import styles from "./LoginForm.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const { login, register } = useUser();
@@ -10,7 +9,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const navigate = useNavigate();
 
   const resetForm = () => {
     setName("");
@@ -28,7 +26,6 @@ const LoginForm = () => {
     try {
       if (!isRegister) {
         await login(email, password);
-        navigate("/tasks");
       } else {
         await register({ email, password, name });
         setIsRegister(false);
