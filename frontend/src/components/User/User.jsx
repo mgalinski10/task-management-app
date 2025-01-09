@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./User.module.scss";
-import { useUser } from "../../context/UserContext";
 
-const User = () => {
-  const { user } = useUser();
-
+const User = ({ name, email }) => {
   return (
     <div className={styles.user}>
       <div className={styles.picture}>
@@ -12,10 +9,10 @@ const User = () => {
       </div>
       <ul className={styles.information}>
         <li>
-          <h3>{user.name}</h3>
+          <h3>{name}</h3>
         </li>
         <li>
-          <p>{user.email}</p>
+          <p>{email}</p>
         </li>
       </ul>
     </div>
