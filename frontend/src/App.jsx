@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useUser } from "./context/UserContext";
 import Menu from "./components/Menu/Menu";
 import TaskPage from "./pages/TaskPage/TaskPage";
@@ -33,9 +33,7 @@ const LoginLayout = () => {
 const App = () => {
   const { user } = useUser();
 
-  return (
-    <BrowserRouter>{!user ? <LoginLayout /> : <MainLayout />}</BrowserRouter>
-  );
+  return <>{!user ? <LoginLayout /> : <MainLayout />}</>;
 };
 
 export default App;

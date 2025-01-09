@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
 
@@ -7,6 +8,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const API_URL = "http://localhost:5000/auth";
+  const navigate = useNavigate();
 
   const checkAuth = async () => {
     try {
@@ -39,8 +41,10 @@ export const UserProvider = ({ children }) => {
       const { user } = response.data;
 
       setUser(user);
+      navigate("/tasks");
     } catch (err) {
       console.log(err);
+      alert("Invalid email or password. Try again.");
     }
   };
 
@@ -56,8 +60,10 @@ export const UserProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       await axios.post(`${API_URL}/register`, userData);
+      alert("Registration successful! Please log in.");
     } catch (err) {
       console.log(err);
+      alert("Account with this email already exists. Try again.");
     }
   };
 
