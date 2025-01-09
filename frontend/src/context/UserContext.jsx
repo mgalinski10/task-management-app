@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
       await axios.post(`${API_URL}/register`, userData);
     } catch (err) {
       console.log(err);
-      alert("Invalid data. Try again");
+      alert("Account with this email already exists. Try again");
     }
   };
 
