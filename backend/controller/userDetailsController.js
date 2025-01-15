@@ -58,6 +58,7 @@ const updateUserDetails = async (req, res) => {
 };
 
 const deleteUserDetails = async (req, res) => {
+  console.log(req.userId);
   try {
     const { userId } = req;
     const userDetails = await UserDetails.findOneAndDelete({ userId });

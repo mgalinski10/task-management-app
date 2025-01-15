@@ -66,6 +66,10 @@ const UserForm = ({ initialData = {} }) => {
         withCredentials: true,
       });
 
+      setNickname("");
+      setGender("");
+      setCountry("");
+
       alert("Data has been deleted.");
     } catch (error) {
       console.error("Error deleting user details:", error);
