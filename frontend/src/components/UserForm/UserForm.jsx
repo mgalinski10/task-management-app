@@ -97,6 +97,7 @@ const UserForm = ({ initialData = {} }) => {
           </select>
         </li>
         <li className={styles.button}>
+          <Button backgroundColor="rgb(255, 103, 86)">Reset</Button>
           <Button type="submit" backgroundColor="rgb(254, 215, 19)">
             Save
           </Button>
