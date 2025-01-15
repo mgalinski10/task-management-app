@@ -12,25 +12,8 @@ const UserForm = ({ initialData = {} }) => {
   const [gender, setGender] = useState(initialData.gender || "");
   const [country, setCountry] = useState(initialData.country || "");
 
-  const fetchUserDetails = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/user-details`,
-        { withCredentials: true }
-      );
-
-      const details = response.data;
-
-      setNickname(details.nickname || "");
-      setGender(details.gender || "");
-      setCountry(details.country || "");
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchUserDetails();
+    fetchProfileDetails();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -65,7 +48,30 @@ const UserForm = ({ initialData = {} }) => {
     } catch (error) {
       console.error("Error creating user details:", error);
     } finally {
-      fetchProfileDetails();
+      await fetchProfileDetails();
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this data?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/api/user-details`, {
+        withCredentials: true,
+      });
+
+      alert("Data has been deleted.");
+    } catch (error) {
+      console.error("Error deleting user details:", error);
+      alert("An error occurred while deleting the data.");
+    } finally {
+      await fetchProfileDetails();
     }
   };
 
@@ -97,7 +103,9 @@ const UserForm = ({ initialData = {} }) => {
           </select>
         </li>
         <li className={styles.button}>
-          <Button backgroundColor="rgb(255, 103, 86)">Reset</Button>
+          <Button backgroundColor="rgb(255, 103, 86)" onClick={handleDelete}>
+            Reset
+          </Button>
           <Button type="submit" backgroundColor="rgb(254, 215, 19)">
             Save
           </Button>
