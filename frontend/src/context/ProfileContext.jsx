@@ -15,8 +15,9 @@ export const ProfilePageProvider = ({ children }) => {
         }
       );
 
-      setProfileDetails(response.data || {});
+      setProfileDetails(response.data);
     } catch (err) {
+      setProfileDetails({});
       console.log(`Error while fetching profile details: ${err}`);
     }
   };
