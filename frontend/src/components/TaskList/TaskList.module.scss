@@ -1,3 +1,37 @@
 .listWrapper {
   list-style: none;
 }
+
+.filterWrapper {
+  margin-bottom: 1em;
+
+  .filterSelect {
+    background-color: inherit;
+    font-family: inherit;
+    margin-left: 2em;
+    border: 1px solid rgb(220, 217, 217);
+    border-radius: 1cap;
+    padding: 0.3em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .exportButton {
+    background-color: inherit;
+    font-family: inherit;
+    padding: 0.4em;
+    margin-left: 2em;
+
+    border: 1px solid rgb(220, 217, 217);
+    border-radius: 1cap;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(0.98);
+      transition: 0.1s ease;
+      background-color: rgb(254, 215, 19);
+    }
+  }
+}
