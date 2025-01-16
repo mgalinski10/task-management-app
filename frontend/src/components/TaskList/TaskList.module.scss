@@ -17,4 +17,21 @@
       cursor: pointer;
     }
   }
+
+  .exportButton {
+    background-color: inherit;
+    font-family: inherit;
+    padding: 0.4em;
+    margin-left: 2em;
+
+    border: 1px solid rgb(220, 217, 217);
+    border-radius: 1cap;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(0.98);
+      transition: 0.1s ease;
+      background-color: lightgreen;
+    }
+  }
 }
