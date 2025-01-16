@@ -23,7 +23,7 @@ export const StickyWallPageProvider = ({ children }) => {
     const socket = new WebSocket("ws://localhost:5000");
 
     socket.onopen = () => {
-      console.log("WebSocket connected");
+      console.log("WebSocket NOTES connected");
     };
 
     socket.onmessage = (event) => {
