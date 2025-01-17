@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UserContext = createContext();
 
@@ -44,7 +45,7 @@ export const UserProvider = ({ children }) => {
       navigate("/tasks");
     } catch (err) {
       console.log(err);
-      alert("Invalid email or password. Try again.");
+      Swal.fire("Error!", "Invalid email or password. Try again.", "error");
     }
   };
 
@@ -52,18 +53,28 @@ export const UserProvider = ({ children }) => {
     try {
       await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
       setUser(null);
+      Swal.fire("Success!", "You have been logged out.", "success");
     } catch (err) {
       console.error("Error during logout", err);
+      Swal.fire("Error!", "Error during logout.", "error");
     }
   };
 
   const register = async (userData) => {
     try {
       await axios.post(`${API_URL}/register`, userData);
-      alert("Registration successful! Please log in.");
+      Swal.fire(
+        "Success!",
+        "Registration successful! Please log in.",
+        "success"
+      );
     } catch (err) {
       console.log(err);
-      alert("Account with this email already exists. Try again.");
+      Swal.fire(
+        "Error!",
+        "Account with this email already exists. Try again.",
+        "error"
+      );
     }
   };
 
