@@ -2,11 +2,20 @@
   width: 95%;
   margin-left: 5%;
 
+  section {
+    overflow: hidden;
+  }
+
   .stickyWall {
     display: grid;
     grid-template-columns: repeat(3, 400px);
     grid-template-rows: repeat(2, 350px);
     width: 90%;
     gap: 5em;
+
+    @media (max-width: 1440px) { 
+        grid-template-columns: repeat(2, 400px); 
+    }
   }
 }
+
