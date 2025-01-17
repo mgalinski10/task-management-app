@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import { useUser } from "../../context/UserContext";
 import axios from "axios";
 import { useProfile } from "../../context/ProfileContext";
-
+import Swal from "sweetalert2";
 const UserForm = ({ initialData = {} }) => {
   const { user } = useUser();
   const { fetchProfileDetails } = useProfile();
@@ -35,6 +35,7 @@ const UserForm = ({ initialData = {} }) => {
             withCredentials: true,
           }
         );
+        Swal.fire("Success!", "Data has been saved.", "success");
       } else {
         await axios.put(
           `http://localhost:5000/api/user-details`,
@@ -43,10 +44,11 @@ const UserForm = ({ initialData = {} }) => {
             withCredentials: true,
           }
         );
+        Swal.fire("Success!", "Data has been updated.", "success");
       }
-      alert("Data has been saved");
     } catch (error) {
       console.error("Error creating user details:", error);
+      Swal.fire("Error!", "An error occurred while saving the data.", "error");
     } finally {
       await fetchProfileDetails();
     }
@@ -54,12 +56,6 @@ const UserForm = ({ initialData = {} }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this data?"
-    );
-
-    if (!confirmDelete) return;
 
     try {
       await axios.delete(`http://localhost:5000/api/user-details`, {
@@ -70,10 +66,14 @@ const UserForm = ({ initialData = {} }) => {
       setGender("");
       setCountry("");
 
-      alert("Data has been deleted.");
+      Swal.fire("Deleted!", "Data has been deleted.", "success");
     } catch (error) {
       console.error("Error deleting user details:", error);
-      alert("An error occurred while deleting the data.");
+      Swal.fire(
+        "Error!",
+        "An error occurred while deleting the data.",
+        "error"
+      );
     } finally {
       await fetchProfileDetails();
     }
