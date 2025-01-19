@@ -1,9 +1,11 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "./UserContext";
 
 const TaskContext = createContext();
 
 export const TaskPageProvider = ({ children }) => {
+  const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTask, setActiveTask] = useState(null);
   const [tasks, setTasks] = useState([]);
@@ -20,24 +22,25 @@ export const TaskPageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:5000");
+    if (user) {
+      const socket = new WebSocket("ws://localhost:5000");
 
-    socket.onopen = () => {
-      console.log("WebSocket TASK connected");
-    };
+      socket.onopen = () => {
+        console.log("WebSocket TASK connected");
+      };
 
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === "TASK_UPDATED") {
+          fetchTasks();
+        }
+      };
 
-      if (data.type === "TASK_UPDATED") {
-        fetchTasks();
-      }
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, []);
+      return () => {
+        socket.close();
+      };
+    }
+  }, [user]);
 
   const openForm = () => {
     setIsOpen(true);
