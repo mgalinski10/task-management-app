@@ -60,7 +60,7 @@ const TaskForm = ({ initialData = {} }) => {
           {
             withCredentials: true,
           }
-        );git 
+        );
       }
 
       closeForm();
