@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "./UserContext";
 
 const StickyWallContext = createContext();
 
 export const StickyWallPageProvider = ({ children }) => {
+  const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [activeNote, setActiveNote] = useState(null);
   const [notes, setNotes] = useState([]);
@@ -20,24 +22,26 @@ export const StickyWallPageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:5000");
+    if (user) {
+      const socket = new WebSocket("ws://localhost:5000");
 
-    socket.onopen = () => {
-      console.log("WebSocket NOTES connected");
-    };
+      socket.onopen = () => {
+        console.log("WebSocket NOTES connected");
+      };
 
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
 
-      if (data.type === "NOTE_UPDATED") {
-        fetchNotes();
-      }
-    };
+        if (data.type === "NOTE_UPDATED") {
+          fetchNotes();
+        }
+      };
 
-    return () => {
-      socket.close();
-    };
-  }, []);
+      return () => {
+        socket.close();
+      };
+    }
+  }, [user]);
 
   const openEditForm = (note) => {
     setActiveNote(note);
