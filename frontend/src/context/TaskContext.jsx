@@ -17,7 +17,7 @@ export const TaskPageProvider = ({ children }) => {
       });
       setTasks(response.data);
     } catch (err) {
-      console.log(`Error while fetching tasks: ${err}`);
+      // console.log(`Error while fetching tasks: ${err}`);
     }
   };
 

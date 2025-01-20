@@ -17,7 +17,7 @@ export const StickyWallPageProvider = ({ children }) => {
       });
       setNotes(response.data);
     } catch (err) {
-      console.log(`Error while fetching tasks: ${err}`);
+      // console.log(`Error while fetching tasks: ${err}`);
     }
   };
 

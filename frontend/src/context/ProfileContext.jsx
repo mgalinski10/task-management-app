@@ -18,7 +18,7 @@ export const ProfilePageProvider = ({ children }) => {
       setProfileDetails(response.data);
     } catch (err) {
       setProfileDetails({});
-      console.log(`Error while fetching profile details: ${err}`);
+      // console.log(`Error while fetching profile details: ${err}`);
     }
   };
 

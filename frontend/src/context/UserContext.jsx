@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
 
       setUser(response.data.user);
     } catch (err) {
-      console.log("User not authenticated");
+      // console.log("User not authenticated");
       setUser(null);
     }
   };
@@ -44,7 +44,7 @@ export const UserProvider = ({ children }) => {
       setUser(user);
       navigate("/tasks");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       Swal.fire("Error!", "Invalid email or password. Try again.", "error");
     }
   };
@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
       setUser(null);
       Swal.fire("Success!", "You have been logged out.", "success");
     } catch (err) {
-      console.error("Error during logout", err);
+      // console.error("Error during logout", err);
       Swal.fire("Error!", "Error during logout.", "error");
     }
   };
