@@ -69,7 +69,7 @@ export const UserProvider = ({ children }) => {
         "success"
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       Swal.fire(
         "Error!",
         "Account with this email already exists. Try again.",
