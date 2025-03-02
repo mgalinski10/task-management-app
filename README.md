@@ -17,3 +17,13 @@
 - **Real-time updates:** WebSockets
 - **State Management:** React Context 
 
+## Screenshots
+### Dashboard View
+![Screenshot 2025-03-02 at 18 22 25](https://github.com/user-attachments/assets/ea062aea-444f-45e2-bd69-32a6fb546d4e)
+
+
+### Task Creation
+![Task Creation](path/to/task-creation-screenshot.jpg)
+
+### Real-Time Updates
+![Real-Time Updates](path/to/real-time-updates-screenshot.jpg)
